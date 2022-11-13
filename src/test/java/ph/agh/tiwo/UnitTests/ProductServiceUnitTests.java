@@ -14,11 +14,11 @@ import ph.agh.tiwo.service.ProductService;
 import java.util.List;
 import java.util.Optional;
 
-import static ph.agh.tiwo.DataProviders.ProductServiceDataProvider.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
+import static ph.agh.tiwo.DataProviders.ProductServiceDataProvider.*;
 public class ProductServiceUnitTests {
 
     @InjectMocks
