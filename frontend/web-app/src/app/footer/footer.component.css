@@ -1,0 +1,14 @@
+#agh{
+  position: absolute;
+  background-color: green;
+  bottom: 10%;
+  left: 45%;
+  width: 100px;
+  mix-blend-mode: multiply;
+}
+#topic{
+  position: absolute;
+  text-align: center;
+  bottom: 5%;
+  left: 30%;
+}
