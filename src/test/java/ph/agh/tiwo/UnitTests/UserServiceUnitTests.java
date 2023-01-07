@@ -38,11 +38,13 @@ public class UserServiceUnitTests {
         when(userRepository.findById(userId)).thenReturn(Optional.ofNullable(user));
         User getUser = this.userService.getUserById(userId);
         assertNotNull(getUser);
+        System.out.println(getUser);
         assertEquals(1, getUser.getId());
         assertEquals("test_name",getUser.getName());
         assertEquals("test_surname",getUser.getSurname());
         assertEquals("test_email",getUser.getEmail());
         assertEquals("test_pass",getUser.getPassword());
+        assertEquals(productLists, getUser.getProductLists());
     }
 
     @Test
@@ -68,6 +70,7 @@ public class UserServiceUnitTests {
         assertEquals("new_surname",newUser.getSurname());
         assertEquals("new_email",newUser.getEmail());
         assertEquals("new_pass",newUser.getPassword());
+        assertEquals(productLists, newUser.getProductLists());
     }
 
     @Test

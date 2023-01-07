@@ -37,9 +37,11 @@ public class ProductServiceUnitTests {
         when(productRepository.findById(productId)).thenReturn(Optional.ofNullable(product));
         Product getProduct = this.productService.getProductById(productId);
         assertNotNull(getProduct);
+        System.out.println(getProduct);
         assertEquals(1, getProduct.getId());
         assertEquals("test_1", getProduct.getName());
         assertEquals(5.0, getProduct.getCost());
+        assertEquals(productList, getProduct.getProductList());
     }
 
 
@@ -64,6 +66,7 @@ public class ProductServiceUnitTests {
         assertEquals(1, newProduct.getId());
         assertEquals("test_2", newProduct.getName());
         assertEquals(10.0, newProduct.getCost());
+        assertEquals(productList, newProduct.getProductList());
     }
 
     @Test
