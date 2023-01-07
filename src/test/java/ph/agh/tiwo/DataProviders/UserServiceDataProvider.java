@@ -1,6 +1,7 @@
 package ph.agh.tiwo.DataProviders;
 
 
+import ph.agh.tiwo.dto.UserDto;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.entity.User;
 
@@ -15,23 +16,37 @@ public class UserServiceDataProvider {
     public static User user;
     public static User user1;
     public static User user2;
+    public static User user3;
     public static List<User> users;
     public static ProductList productList;
+    public static ProductList productList1;
     public static Set<ProductList> productLists;
+    public static Set<ProductList> productLists1;
+
+    public static UserDto userDto;
     static {
         productList = ProductList.builder().id(2L).name("test_1").user(user).build();
+        productList1 = ProductList.builder().id(3L).name("test_1").user(user).build();
         productLists = new HashSet<>();
         productLists.add(productList);
+        productLists1 = new HashSet<>();
+        productLists1.add(productList);
+        productLists1.add(productList1);
         user = User.builder().id(userId).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productLists).build();
         user1 = User.builder().id(userId).name("new_name").surname("new_surname").email("new_email").password("new_pass").productLists(productLists).build();
         user2 = new User();
         user2.setId(userId);
-        user2.setName("test_name1");
-        user2.setSurname("test_surname1");
-        user2.setEmail("test_email1");
-        user2.setPassword("test_pass1");
+        user2.setName("test_name_1");
+        user2.setSurname("test_surname_1");
+        user2.setEmail("test_email_1");
+        user2.setPassword("test_pass");
+        user2.setProductLists(productLists1);
         users = new ArrayList<>();
         users.add(user);
         users.add(user1);
+
+        user3 = User.builder().id(userId).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productLists).build();
+        userDto = new UserDto("test_name_1","test_surname","test_email_1",productLists1);
+        userDto.setSurname("test_surname_1");
     }
 }

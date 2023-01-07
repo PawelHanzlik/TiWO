@@ -34,7 +34,7 @@ public class UserServiceUnitTests {
     }
 
     @Test
-    void getUserTest(){
+    void getUserByIdTest(){
         when(userRepository.findById(userId)).thenReturn(Optional.ofNullable(user));
         User getUser = this.userService.getUserById(userId);
         assertNotNull(getUser);
@@ -48,9 +48,29 @@ public class UserServiceUnitTests {
     }
 
     @Test
-    void getUserNoSuchUserExceptionTest(){
+    void getUserByIdNoSuchUserExceptionTest(){
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
         assertThrows(NoSuchUserException.class, () -> userService.getUserById(userId));
+    }
+
+    @Test
+    void getUserByEmailTest(){
+        when(userRepository.findByEmail("test_email")).thenReturn(Optional.ofNullable(user));
+        User getUser = this.userService.getUserByEmail("test_email");
+        assertNotNull(getUser);
+        System.out.println(getUser);
+        assertEquals(1, getUser.getId());
+        assertEquals("test_name",getUser.getName());
+        assertEquals("test_surname",getUser.getSurname());
+        assertEquals("test_email",getUser.getEmail());
+        assertEquals("test_pass",getUser.getPassword());
+        assertEquals(productLists, getUser.getProductLists());
+    }
+
+    @Test
+    void getUserByEmailNoSuchUserExceptionTest(){
+        when(userRepository.findByEmail("test_email")).thenReturn(Optional.empty());
+        assertThrows(NoSuchUserException.class, () -> userService.getUserByEmail("test_email"));
     }
 
     @Test
@@ -71,6 +91,26 @@ public class UserServiceUnitTests {
         assertEquals("new_email",newUser.getEmail());
         assertEquals("new_pass",newUser.getPassword());
         assertEquals(productLists, newUser.getProductLists());
+    }
+
+    @Test
+    void updateUserTest(){
+        when(userRepository.findById(userId)).thenReturn(Optional.ofNullable(user3));
+        when(userRepository.save(any(User.class))).thenReturn(user2);
+        User updatedUser = this.userService.updateUser(userId,userDto);
+        assertNotNull(updatedUser);
+        assertEquals(userId, updatedUser.getId());
+        assertEquals("test_name_1",updatedUser.getName());
+        assertEquals("test_surname_1",updatedUser.getSurname());
+        assertEquals("test_email_1",updatedUser.getEmail());
+        assertEquals("test_pass",updatedUser.getPassword());
+        assertEquals(productLists1, updatedUser.getProductLists());
+    }
+
+    @Test
+    void updateUserNoSuchUserExceptionTest(){
+        when(userRepository.findById(userId)).thenReturn(Optional.empty());
+        assertThrows(NoSuchUserException.class, () -> userService.updateUser(userId,userDto));
     }
 
     @Test

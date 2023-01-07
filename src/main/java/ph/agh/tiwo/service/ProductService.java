@@ -42,7 +42,18 @@ public class ProductService {
     public Product addProduct(Product product) {
         return this.productRepository.save(product);
     }
-    
+
+    public Product updateProduct(Long productId, Product productToUpdate) throws NoSuchProductException{
+        Optional<Product> productOptional = this.productRepository.findById(productId);
+        if (productOptional.isEmpty()){
+            throw new NoSuchProductException();
+        }
+        Product product = productOptional.get();
+        product.setName(productToUpdate.getName());
+        product.setCost(productToUpdate.getCost());
+        product.setProductList(productToUpdate.getProductList());
+        return this.productRepository.save(product);
+    }
     public void deleteProduct(Long productId) throws NoSuchProductException {
         Optional<Product> productOptional = this.productRepository.findById(productId);
         if (productOptional.isEmpty()){

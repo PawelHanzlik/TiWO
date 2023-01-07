@@ -33,7 +33,7 @@ public class ProductServiceUnitTests {
     }
 
     @Test
-    void getProductTestOK(){
+    void getProductByIdTestOK(){
         when(productRepository.findById(productId)).thenReturn(Optional.ofNullable(product));
         Product getProduct = this.productService.getProductById(productId);
         assertNotNull(getProduct);
@@ -44,11 +44,28 @@ public class ProductServiceUnitTests {
         assertEquals(productList, getProduct.getProductList());
     }
 
+    @Test
+    void getProductByNameTestOK(){
+        when(productRepository.findByName("test_1")).thenReturn(Optional.ofNullable(product));
+        Product getProduct = this.productService.getProductByName("test_1");
+        assertNotNull(getProduct);
+        System.out.println(getProduct);
+        assertEquals(1, getProduct.getId());
+        assertEquals("test_1", getProduct.getName());
+        assertEquals(5.0, getProduct.getCost());
+        assertEquals(productList, getProduct.getProductList());
+    }
 
     @Test
-    void getProductNoSuchProductExceptionTestOK(){
+    void getProductByIdNoSuchProductExceptionTestOK(){
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
         assertThrows(NoSuchProductException.class, () -> productService.getProductById(productId));
+    }
+
+    @Test
+    void getProductByNameNoSuchProductExceptionTestOK(){
+        when(productRepository.findByName("test_1")).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductException.class, () -> productService.getProductByName("test_1"));
     }
 
     @Test
@@ -67,6 +84,24 @@ public class ProductServiceUnitTests {
         assertEquals("test_2", newProduct.getName());
         assertEquals(10.0, newProduct.getCost());
         assertEquals(productList, newProduct.getProductList());
+    }
+
+    @Test
+    void updateProductTestOK(){
+        when(productRepository.findById(productId)).thenReturn(Optional.ofNullable(product2));
+        when(productRepository.save(any(Product.class))).thenReturn(product3);
+        Product updatedProduct = this.productService.updateProduct(productId,product3);
+        assertNotNull(updatedProduct);
+        assertEquals(productId, updatedProduct.getId());
+        assertEquals("test_4", updatedProduct.getName());
+        assertEquals(20.0, updatedProduct.getCost());
+        assertEquals(productList1, updatedProduct.getProductList());
+    }
+
+    @Test
+    void updateProductNoSuchProductExceptionTestOK(){
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductException.class, () -> productService.updateProduct(productId, product3));
     }
 
     @Test

@@ -3,6 +3,7 @@ package ph.agh.tiwo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ph.agh.tiwo.dto.UserDto;
 import ph.agh.tiwo.entity.User;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
 import ph.agh.tiwo.repository.UserRepository;
@@ -42,7 +43,19 @@ public class UserService {
     public User addUser(User user) {
         return this.userRepository.save(user);
     }
-    
+
+    public User updateUser(Long userId, UserDto userDto) throws NoSuchUserException{
+        Optional<User> userOptional = this.userRepository.findById(userId);
+        if (userOptional.isEmpty()){
+            throw new NoSuchUserException();
+        }
+        User user =  userOptional.get();
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setProductLists(userDto.getProductLists());
+        return this.userRepository.save(user);
+    }
     public void deleteUser(Long userId) throws NoSuchUserException {
         Optional<User> userOptional = this.userRepository.findById(userId);
         if (userOptional.isEmpty()){

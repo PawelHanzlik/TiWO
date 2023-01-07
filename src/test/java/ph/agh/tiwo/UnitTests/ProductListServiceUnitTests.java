@@ -74,6 +74,24 @@ public class ProductListServiceUnitTests {
     }
 
     @Test
+    void updateProductListTestOK(){
+        when(productListRepository.findById(productListId)).thenReturn(Optional.ofNullable(productList3));
+        when(productListRepository.save(any(ProductList.class))).thenReturn(productList2);
+        ProductList updatedProductList = this.productListService.updateProductList(productListId, productListDto);
+        assertNotNull(updatedProductList);
+        assertEquals(1L, updatedProductList.getId());
+        assertEquals("test_3", updatedProductList.getName());
+        assertEquals(user, updatedProductList.getUser());
+        assertEquals(products1, updatedProductList.getProducts());
+        assertEquals("test_3", updatedProductList.getDescription());
+    }
+
+    @Test
+    void updateProductListNoSuchProductListExceptionTestOK(){
+        when(productListRepository.findById(productListId)).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductListException.class, () -> productListService.updateProductList(productListId, productListDto));
+    }
+    @Test
     void deleteProductListTestOK() {
         Optional<ProductList> optionalProductList = Optional.of(productList);
 
