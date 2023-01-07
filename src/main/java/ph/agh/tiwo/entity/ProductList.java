@@ -1,9 +1,11 @@
 package ph.agh.tiwo.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,8 +14,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Users")
-public class User {
+@Table(name = "Product_List")
+public class ProductList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -23,17 +25,16 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname", nullable = false)
-    private String surname;
-
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "productList")
     @ToString.Exclude
-    private Set<ProductList> productLists;
+    private List<Product> products;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

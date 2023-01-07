@@ -1,6 +1,7 @@
 package ph.agh.tiwo.entity;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -24,4 +25,9 @@ public class Product {
 
     @Column(name = "cost", nullable = false)
     private Double cost;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "products")
+    private ProductList productList;
 }

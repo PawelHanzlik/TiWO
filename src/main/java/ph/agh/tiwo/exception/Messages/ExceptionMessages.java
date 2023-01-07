@@ -7,8 +7,8 @@ import lombok.Getter;
 public enum ExceptionMessages {
 
     NO_SUCH_USER("No such user"),
-    NO_SUCH_PRODUCT("No such product");
-
+    NO_SUCH_PRODUCT("No such product"),
+    NO_SUCH_PRODUCT_LIST("No such product list");
     @Getter
     private final String errorMessage;
 }

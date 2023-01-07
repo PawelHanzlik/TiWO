@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
+import ph.agh.tiwo.exception.Classes.NoSuchProductListException;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
 
 import java.util.Date;
@@ -26,7 +27,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = {NoSuchProductException.class})
-    public ResponseEntity<Object> handleNoSuchParkingLotException() {
+    public ResponseEntity<Object> handleNoSuchProductException() {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = {NoSuchProductListException.class})
+    public ResponseEntity<Object> handleNoSuchProductListException() {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
         return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
