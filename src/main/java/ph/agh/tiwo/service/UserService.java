@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ph.agh.tiwo.dto.UserDto;
 import ph.agh.tiwo.entity.User;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
+import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
 import ph.agh.tiwo.repository.UserRepository;
 
 import java.util.Collections;
@@ -41,7 +42,11 @@ public class UserService {
         return this.userRepository.findAll();
     }
     
-    public User addUser(User user) {
+    public User addUser(User user) throws UserAlreadyExistsException{
+        Optional<User> userOptional = this.userRepository.findByEmail(user.getEmail());
+        if (userOptional.isPresent()){
+            throw new UserAlreadyExistsException();
+        }
         return this.userRepository.save(user);
     }
 

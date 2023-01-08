@@ -8,27 +8,27 @@
 
 #LoginTitle{
   position: absolute;
-  top: 35%;
+  top: 30%;
   left: 48%;
 }
 #Email{
   position: absolute;
-  top: 44%;
+  top: 39%;
   left: 45%;
 }
 #EmailTitle{
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 38%;
 }
 #PasswordTitle{
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 39%;
 }
 #Password{
   position: absolute;
-  top: 54%;
+  top: 49%;
   left: 45%;
 }
 
@@ -41,12 +41,18 @@
 
 #Register{
   font-size: 10pt;
-  top: 58%;
+  top: 53%;
   left: 38%;
 }
 
 #Register ~ link{
   color: blue;
+}
+
+#error{
+  font-size: 15pt;
+  top: 56%;
+  left: 45%;
 }
 
 a:link {

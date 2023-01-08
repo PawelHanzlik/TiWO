@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ph.agh.tiwo.entity.User;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
+import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
 import ph.agh.tiwo.repository.UserRepository;
 import ph.agh.tiwo.service.UserService;
 
@@ -86,12 +87,18 @@ public class UserServiceUnitTests {
         when(userRepository.save(any(User.class))).thenReturn(user1);
         User newUser = this.userService.addUser(user1);
         assertNotNull(newUser);
-        assertEquals(1, newUser.getId());
+        assertEquals(3, newUser.getId());
         assertEquals("new_name",newUser.getName());
         assertEquals("new_surname",newUser.getSurname());
         assertEquals("new_email",newUser.getEmail());
         assertEquals("new_pass",newUser.getPassword());
         assertEquals(productLists, newUser.getProductLists());
+    }
+
+    @Test
+    void addUserUserAlreadyExistsExceptionTest(){
+        when(userRepository.findByEmail("test_email")).thenReturn(Optional.ofNullable(user));
+        assertThrows(UserAlreadyExistsException.class, () -> this.userService.addUser(user));
     }
 
     @Test

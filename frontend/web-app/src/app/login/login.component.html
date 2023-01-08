@@ -9,8 +9,9 @@
     <a id = "link" routerLink="/register">Register</a>
   </label>
 
+  <label class="centered" id="error" *ngIf="loginOk" style="color:#990000">Błąd logowania!!!</label>
   <button id="button" class="button">
-    <a (click)="login()" routerLink="/user-page">SUBMIT</a>
+    <a (click)="login()">SUBMIT</a>
   </button>
 
 </div>

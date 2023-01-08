@@ -25,6 +25,12 @@ public class UserServiceDataProvider {
 
     public static UserDto userDto;
     public static UserDto userDto1;
+
+    public static User userInt;
+    public static User userInt1;
+    public static List<User> usersInt;
+    public static Set<ProductList> productListsInt;
+    public static ProductList productListInt;
     static {
         productList = ProductList.builder().id(2L).name("test_1").user(user).build();
         productList1 = ProductList.builder().id(3L).name("test_1").user(user).build();
@@ -34,7 +40,7 @@ public class UserServiceDataProvider {
         productLists1.add(productList);
         productLists1.add(productList1);
         user = User.builder().id(userId).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productLists).build();
-        user1 = User.builder().id(userId).name("new_name").surname("new_surname").email("new_email").password("new_pass").productLists(productLists).build();
+        user1 = User.builder().id(3L).name("new_name").surname("new_surname").email("new_email").password("new_pass").productLists(productLists).build();
         user2 = new User();
         user2.setId(userId);
         user2.setName("test_name_1");
@@ -54,5 +60,14 @@ public class UserServiceDataProvider {
         userDto1.setSurname("surname");
         userDto1.setName("name");
         userDto.setProductLists(productLists);
+
+        userInt = User.builder().id(2L).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productListsInt).build();
+        userInt1 = User.builder().id(3L).name("new_name").surname("new_surname").email("new_email").password("new_pass").productLists(productListsInt).build();
+        productListInt = ProductList.builder().id(2L).name("test_1").description("test").build();
+        productListsInt = new HashSet<>();
+        productListsInt.add(productListInt);
+        usersInt = new ArrayList<>();
+        usersInt.add(userInt);
+        usersInt.add(userInt1);
     }
 }
