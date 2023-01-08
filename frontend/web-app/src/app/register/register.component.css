@@ -1,0 +1,60 @@
+.centered {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15pt;
+}
+
+#RegisterTitle{
+  position: absolute;
+  top: 22%;
+  left: 48%;
+}
+#Email{
+  position: absolute;
+  top: 29%;
+  left: 45%;
+}
+#EmailTitle{
+  position: absolute;
+  top: 25%;
+  left: 38%;
+}
+#PasswordTitle{
+  position: absolute;
+  top: 35%;
+  left: 39%;
+}
+#Password{
+  position: absolute;
+  top: 39%;
+  left: 45%;
+}
+#Name{
+  position: absolute;
+  top: 49%;
+  left: 45%;
+}
+#NameTitle{
+  position: absolute;
+  top: 45%;
+  left: 38%;
+}
+#Surname{
+  position: absolute;
+  top: 59%;
+  left: 45%;
+}
+#SurnameTitle{
+  position: absolute;
+  top: 55%;
+  left: 39%;
+}
+
+.button {
+  position: absolute;
+  top: 65%;
+  right: 40%;
+  font-size: 15pt;
+}

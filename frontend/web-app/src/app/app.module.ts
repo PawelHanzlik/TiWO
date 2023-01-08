@@ -9,12 +9,20 @@ import { FooterComponent } from './footer/footer.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {AppService} from "./app-service";
+import { LoginComponent } from './login/login.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { RegisterComponent } from './register/register.component';
+import { RegisterResultComponent } from './register-result/register-result.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainPageComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    UserPageComponent,
+    RegisterComponent,
+    RegisterResultComponent
   ],
   imports: [
     BrowserModule,

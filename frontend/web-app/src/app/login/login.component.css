@@ -1,0 +1,66 @@
+.centered {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15pt;
+}
+
+#LoginTitle{
+  position: absolute;
+  top: 35%;
+  left: 48%;
+}
+#Email{
+  position: absolute;
+  top: 44%;
+  left: 45%;
+}
+#EmailTitle{
+  position: absolute;
+  top: 40%;
+  left: 38%;
+}
+#PasswordTitle{
+  position: absolute;
+  top: 50%;
+  left: 39%;
+}
+#Password{
+  position: absolute;
+  top: 54%;
+  left: 45%;
+}
+
+.button {
+  position: absolute;
+  top: 60%;
+  right: 40%;
+  font-size: 15pt;
+}
+
+#Register{
+  font-size: 10pt;
+  top: 58%;
+  left: 38%;
+}
+
+#Register ~ link{
+  color: blue;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
