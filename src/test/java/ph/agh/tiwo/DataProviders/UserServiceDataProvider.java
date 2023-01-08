@@ -24,6 +24,7 @@ public class UserServiceDataProvider {
     public static Set<ProductList> productLists1;
 
     public static UserDto userDto;
+    public static UserDto userDto1;
     static {
         productList = ProductList.builder().id(2L).name("test_1").user(user).build();
         productList1 = ProductList.builder().id(3L).name("test_1").user(user).build();
@@ -48,5 +49,10 @@ public class UserServiceDataProvider {
         user3 = User.builder().id(userId).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productLists).build();
         userDto = new UserDto("test_name_1","test_surname","test_email_1",productLists1);
         userDto.setSurname("test_surname_1");
+        userDto1 = new UserDto();
+        userDto1.setEmail("email");
+        userDto1.setSurname("surname");
+        userDto1.setName("name");
+        userDto.setProductLists(productLists);
     }
 }

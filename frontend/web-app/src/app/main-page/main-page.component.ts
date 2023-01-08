@@ -13,8 +13,5 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public generateData(): void {
-    this.appService.generateData();
-  }
 
 }

@@ -8,6 +8,7 @@ import ph.agh.tiwo.entity.User;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
 import ph.agh.tiwo.repository.UserRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,4 +68,11 @@ public class UserService {
         }
     }
 
+    public User buildUser(UserDto userDto, String password){
+        return User.builder().name(userDto.getName())
+                .surname(userDto.getSurname())
+                .email(userDto.getEmail())
+                .password(password)
+                .productLists(Collections.emptySet()).build();
+    }
 }

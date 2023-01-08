@@ -2,15 +2,15 @@
   <label class="centered" id="RegisterTitle" >REGISTER</label>
   <label class="centered" id="EmailTitle" for="Email">Email</label>
   <label class="centered" id="PasswordTitle" for="Password">Password</label>
-  <input class="centered" type="text" [defaultValue]="" id="Email" name="Email">
-  <input class="centered" type="text" [defaultValue]="" id="Password" name="Password">
+  <input class="centered" type="text" [defaultValue]="" id="Email" name="Email" (change)="assignEmail($event.target)">
+  <input class="centered" type="text" [defaultValue]="" id="Password" name="Password" (change)="assignPassword($event.target)">
   <label class="centered" id="NameTitle" for="Name">Name</label>
   <label class="centered" id="SurnameTitle" for="Surname">Surname</label>
-  <input class="centered" type="text" [defaultValue]="" id="Name" name="Name">
-  <input class="centered" type="text" [defaultValue]="" id="Surname" name="Surname">
+  <input class="centered" type="text" [defaultValue]="" id="Name" name="Name" (change)="assignName($event.target)">
+  <input class="centered" type="text" [defaultValue]="" id="Surname" name="Surname" (change)="assignSurname($event.target)">
 
   <button id="button" class="button">
-    <a routerLink="/register-result">Register</a>
+    <a (click)="register()" routerLink="/register-result">Register</a>
   </button>
 
 </div>

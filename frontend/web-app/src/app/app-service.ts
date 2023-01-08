@@ -14,14 +14,19 @@ export class AppService {
   response = ""
   constructor(private http: HttpClient) { }
 
-  public generateData(): void {
-     this.http.get<String>(`${this.apiServerUrl}/api/maxsat/GenerateData`).subscribe(
-       response => { console.log(response)}
-     );
+  public login(email: String, password: String): void {
+    this.http.get<String>(`${this.apiServerUrl}/tiwo/login?email=${email}&password=${password}`).subscribe(
+      response => { console.log(response)}
+    );
   }
 
-  public assignCity(city: String): void {
-    this.http.get<String>(`${this.apiServerUrl}/api/maxsat/AssignCity?city=${city}`).subscribe(
+  public register(user: user, password: String): void {
+    this.http.post<Map<string, string>>(`${this.apiServerUrl}/tiwo/register?password=${password}`,{
+      "name" : user.name,
+      "surname" : user.surname,
+      "email" : user.email,
+      "productLists" : []
+    }).subscribe(
       response => { console.log(response)}
     );
   }
@@ -31,4 +36,10 @@ export class AppService {
       response => { console.log(response) ; this.response = String(response)}
     );
   }
+}
+interface user{
+  name: String;
+  surname: String;
+  email: String;
+  lists: [];
 }

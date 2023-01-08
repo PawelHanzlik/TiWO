@@ -11,6 +11,7 @@ import ph.agh.tiwo.exception.Classes.NoSuchUserException;
 import ph.agh.tiwo.repository.UserRepository;
 import ph.agh.tiwo.service.UserService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -129,5 +130,15 @@ public class UserServiceUnitTests {
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
         assertThrows(NoSuchUserException.class, () -> userService.deleteUser(userId));
     }
-    
+
+    @Test
+    void buildUserTest(){
+        User user = this.userService.buildUser(userDto1,"pass");
+        assertNotNull(user);
+        assertEquals("name",user.getName());
+        assertEquals("surname",user.getSurname());
+        assertEquals("email",user.getEmail());
+        assertEquals("pass",user.getPassword());
+        assertEquals(Collections.emptySet(), user.getProductLists());
+    }
 }
