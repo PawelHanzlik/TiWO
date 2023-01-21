@@ -1,7 +1,7 @@
 package ph.agh.tiwo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -26,8 +26,16 @@ public class Product {
     @Column(name = "cost", nullable = false)
     private Double cost;
 
-    @ManyToOne
+    @Column(name = "bought")
+    private Boolean bought;
+
+    @Column(name = "quantity")
+    private Double quantity;
+
+    @Column(name = "type")
+    private String type;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JsonIgnore
-    @JoinColumn(name = "products")
     private ProductList productList;
 }

@@ -2,10 +2,20 @@ package ph.agh.tiwo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import ph.agh.tiwo.dto.LoginDto;
 import ph.agh.tiwo.dto.UserDto;
+import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.entity.User;
+import ph.agh.tiwo.exception.Classes.NoSuchUserException;
+import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
+import ph.agh.tiwo.repository.UserRepository;
+import ph.agh.tiwo.security.JwtTokenGenerator;
 import ph.agh.tiwo.service.UserService;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/tiwo/user")
@@ -13,34 +23,47 @@ import ph.agh.tiwo.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final JwtTokenGenerator jwtTokenGenerator;
 
-    public UserController(UserService userService) {
+    private final PasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+
+    public UserController(UserService userService,JwtTokenGenerator jwtTokenGenerator, PasswordEncoder bCryptPasswordEncoder,
+                          UserRepository userRepository) {
         this.userService = userService;
+        this.jwtTokenGenerator = jwtTokenGenerator;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userRepository = userRepository;
     }
 
-    @GetMapping("/login")
-    public HttpStatus login(@RequestParam String email, @RequestParam String password){
-        User user = this.userService.getUserByEmail(email);
-        if (user.getPassword().equals(password))
-            return HttpStatus.OK;
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
+        User user = this.userService.getUserByEmail(loginDto.getEmail());
+        if (user == null)
+            throw new NoSuchUserException();
+        if (user.getPassword().equals(loginDto.getPassword()))
+            return new ResponseEntity<>(jwtTokenGenerator.generateToken(
+                    new UsernamePasswordAuthenticationToken(user.getEmail(),
+            user.getPassword(), null)),HttpStatus.OK);
         else
-            return HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody UserDto userDto, @RequestParam String password){
-        User user = userService.buildUser(userDto,password);
-        return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
+        User user = userService.buildUser(userDto,bCryptPasswordEncoder.encode(password));
+        try {
+            User addedUser = userService.addUser(user);
+            return new ResponseEntity<>(addedUser, HttpStatus.CREATED);
+        }catch (UserAlreadyExistsException e){
+            throw new UserAlreadyExistsException();
+        }
     }
 
-    @GetMapping()
-    public ResponseEntity<User> getUser(@RequestParam String email){
-        return new ResponseEntity<>(userService.getUserByEmail(email), HttpStatus.OK);
+    @GetMapping("/getLists")
+    public ResponseEntity<Set<ProductList>> getLists(@RequestParam String email){
+        User user = userService.getUserByEmail(email);
+        return new ResponseEntity<>(user.getProductLists(), HttpStatus.OK);
     }
 
-    @DeleteMapping()
-    public HttpStatus deleteUser(@RequestParam Long id){
-        userService.deleteUser(id);
-        return HttpStatus.OK;
-    }
 }

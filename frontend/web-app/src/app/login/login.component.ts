@@ -46,5 +46,5 @@ export class LoginComponent implements OnInit {
 }
 
 interface loginData{
-  value: String;
+  value: string;
 }

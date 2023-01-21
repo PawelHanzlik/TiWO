@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.exception.Classes.NoSuchProductListException;
+import ph.agh.tiwo.exception.Classes.ProductListAlreadyExistsException;
 import ph.agh.tiwo.repository.ProductListRepository;
 import ph.agh.tiwo.service.ProductListService;
 
@@ -34,24 +35,40 @@ public class ProductListServiceUnitTests {
     }
 
     @Test
-    void getProductListTestOK(){
+    void getProductListByIdTestOK(){
         when(productListRepository.findById(productListId)).thenReturn(Optional.ofNullable(productList));
         ProductList getProductList = this.productListService.getProductListById(productListId);
         assertNotNull(getProductList);
-        productList = ProductList.builder().id(productListId).name("test_1").user(user)
+        productList = ProductList.builder().id(productListId).name("test_1")
                 .products(products).description("test").build();
         assertEquals(1L, getProductList.getId());
         assertEquals("test_1", getProductList.getName());
-        assertEquals(user, getProductList.getUser());
         assertEquals(products, getProductList.getProducts());
         assertEquals("test", getProductList.getDescription());
     }
 
-
+    @Test
+    void getProductListByNameTestOK(){
+        when(productListRepository.findByName(productList.getName())).thenReturn(Optional.ofNullable(productList));
+        ProductList getProductList = this.productListService.getProductListByName(productList.getName());
+        assertNotNull(getProductList);
+        productList = ProductList.builder().id(productListId).name("test_1")
+                .products(products).description("test").build();
+        assertEquals(1L, getProductList.getId());
+        assertEquals("test_1", getProductList.getName());
+        assertEquals(products, getProductList.getProducts());
+        assertEquals("test", getProductList.getDescription());
+    }
     @Test
     void getProductListNoSuchProductListExceptionTestOK(){
         when(productListRepository.findById(productListId)).thenReturn(Optional.empty());
         assertThrows(NoSuchProductListException.class, () -> productListService.getProductListById(productListId));
+    }
+
+    @Test
+    void getProductListByNameNoSuchProductListExceptionTestOK(){
+        when(productListRepository.findByName(productList.getName())).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductListException.class, () -> productListService.getProductListByName(productList.getName()));
     }
 
     @Test
@@ -68,20 +85,35 @@ public class ProductListServiceUnitTests {
         assertNotNull(newProductList);
         assertEquals(2L, newProductList.getId());
         assertEquals("test_2", newProductList.getName());
-        assertEquals(user, newProductList.getUser());
         assertEquals(products, newProductList.getProducts());
         assertEquals("test_2", newProductList.getDescription());
     }
 
     @Test
-    void updateProductListTestOK(){
+    void addProductList_ProductAlreadyExistsException(){
+        when(productListRepository.findByName(productList.getName())).thenReturn(Optional.ofNullable(productList));
+        assertThrows(ProductListAlreadyExistsException.class, () -> productListService.addProductList(productList));
+    }
+    @Test
+    void updateProductListByIdTestOK(){
         when(productListRepository.findById(productListId)).thenReturn(Optional.ofNullable(productList3));
         when(productListRepository.save(any(ProductList.class))).thenReturn(productList2);
         ProductList updatedProductList = this.productListService.updateProductList(productListId, productListDto);
         assertNotNull(updatedProductList);
         assertEquals(1L, updatedProductList.getId());
         assertEquals("test_3", updatedProductList.getName());
-        assertEquals(user, updatedProductList.getUser());
+        assertEquals(products1, updatedProductList.getProducts());
+        assertEquals("test_3", updatedProductList.getDescription());
+    }
+
+    @Test
+    void updateProductListByNameTestOK(){
+        when(productListRepository.findByName(productList3.getName())).thenReturn(Optional.ofNullable(productList3));
+        when(productListRepository.save(any(ProductList.class))).thenReturn(productList2);
+        ProductList updatedProductList = this.productListService.updateProductList(productList3.getName(), productListDto);
+        assertNotNull(updatedProductList);
+        assertEquals(1L, updatedProductList.getId());
+        assertEquals("test_3", updatedProductList.getName());
         assertEquals(products1, updatedProductList.getProducts());
         assertEquals("test_3", updatedProductList.getDescription());
     }
@@ -91,8 +123,15 @@ public class ProductListServiceUnitTests {
         when(productListRepository.findById(productListId)).thenReturn(Optional.empty());
         assertThrows(NoSuchProductListException.class, () -> productListService.updateProductList(productListId, productListDto));
     }
+
     @Test
-    void deleteProductListTestOK() {
+    void updateProductByNameListNoSuchProductListExceptionTestOK(){
+        when(productListRepository.findByName(productList.getName())).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductListException.class, () -> productListService.updateProductList(productList.getName(), productListDto));
+    }
+
+    @Test
+    void deleteProductListByIdTestOK() {
         Optional<ProductList> optionalProductList = Optional.of(productList);
 
         when(productListRepository.findById(productListId)).thenReturn(optionalProductList);
@@ -103,9 +142,26 @@ public class ProductListServiceUnitTests {
     }
 
     @Test
+    void deleteProductListByNameTestOK() {
+        Optional<ProductList> optionalProductList = Optional.of(productList);
+
+        when(productListRepository.findByName(productList.getName())).thenReturn(optionalProductList);
+
+        productListService.deleteProductList(productList.getName());
+
+        Mockito.verify(productListRepository, times(1)).delete(optionalProductList.get());
+    }
+
+    @Test
     void deleteProductListNoSuchProductListExceptionTestOK(){
         when(productListRepository.findById(productListId)).thenReturn(Optional.empty());
         assertThrows(NoSuchProductListException.class, () -> productListService.deleteProductList(productListId));
+    }
+
+    @Test
+    void deleteProductByNameListNoSuchProductListExceptionTestOK(){
+        when(productListRepository.findByName(productList.getName())).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductListException.class, () -> productListService.deleteProductList(productList.getName()));
     }
 
 }

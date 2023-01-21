@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService} from "../app-service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,9 @@ export class RegisterComponent implements OnInit {
   password: registerData;
   name: registerData;
   surname: registerData;
-
+  registerOk: boolean
   user: user;
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private router: Router) {
     this.email = {
       value: ""
     }
@@ -34,6 +35,7 @@ export class RegisterComponent implements OnInit {
       email:"",
       lists: []
     }
+    this.registerOk = false
   }
 
   assignPassword(value: any) {
@@ -58,8 +60,10 @@ export class RegisterComponent implements OnInit {
   }
 
   public register(): void {
-    console.log(this.user)
-    this.appService.register(this.user, this.password.value)
+    this.appService.register(this.user, this.password.value).subscribe(
+      () => { this.router.navigate(['/register-result'])},
+      () => {this.registerOk = true}
+    );
   }
 }
 interface registerData{

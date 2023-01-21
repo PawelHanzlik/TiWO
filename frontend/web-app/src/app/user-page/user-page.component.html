@@ -1,1 +1,11 @@
-<p>user-page works!</p>
+<div id = "lista" *ngFor="let row of lists">
+  <p>lista:</p>
+  <table>
+    <tr *ngFor="let product of row.products">
+      <td>{{product.name}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.type}}</td>
+      <td>{{product.cost}}</td>
+    </tr>
+  </table>
+</div>

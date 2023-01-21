@@ -13,6 +13,10 @@ import { LoginComponent } from './login/login.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { RegisterComponent } from './register/register.component';
 import { RegisterResultComponent } from './register-result/register-result.component';
+
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./AuthInterceptor";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,7 @@ import { RegisterResultComponent } from './register-result/register-result.compo
     HttpClientModule,
     FormsModule
   ],
-  providers: [AppService],
+  providers: [AppService, {provide: HTTP_INTERCEPTORS , useClass : AuthInterceptor , multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ph.agh.tiwo.entity.ProductList;
 
+import java.util.Optional;
+
 
 @Repository
 public interface ProductListRepository extends JpaRepository<ProductList, Long> {
+
+    Optional<ProductList> findByName(String name);
 }

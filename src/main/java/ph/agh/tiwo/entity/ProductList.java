@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -25,16 +26,17 @@ public class ProductList {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "productList")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "productList" , fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @Column(name = "dueTo")
+    private LocalDate dueTo;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JsonIgnore
-    @JoinColumn(name = "user_id")
     private User user;
 
 }

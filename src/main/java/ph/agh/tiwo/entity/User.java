@@ -1,6 +1,8 @@
 package ph.agh.tiwo.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -32,8 +34,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<ProductList> productLists;
 
 }

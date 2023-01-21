@@ -62,6 +62,20 @@ public class UserService {
         user.setProductLists(userDto.getProductLists());
         return this.userRepository.save(user);
     }
+
+    public User updateUser(String userEmail, UserDto userDto) throws NoSuchUserException{
+        Optional<User> userOptional = this.userRepository.findByEmail(userEmail);
+        if (userOptional.isEmpty()){
+            throw new NoSuchUserException();
+        }
+        User user =  userOptional.get();
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setProductLists(userDto.getProductLists());
+        return this.userRepository.save(user);
+    }
+
     public void deleteUser(Long userId) throws NoSuchUserException {
         Optional<User> userOptional = this.userRepository.findById(userId);
         if (userOptional.isEmpty()){

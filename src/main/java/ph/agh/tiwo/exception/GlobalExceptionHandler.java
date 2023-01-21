@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import ph.agh.tiwo.exception.Classes.NoSuchProductException;
-import ph.agh.tiwo.exception.Classes.NoSuchProductListException;
-import ph.agh.tiwo.exception.Classes.NoSuchUserException;
-import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
+import ph.agh.tiwo.exception.Classes.*;
 
 import java.util.Date;
 
@@ -41,6 +38,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {UserAlreadyExistsException.class})
     public ResponseEntity<Object> handleUserAlreadyExistsException() {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = {ProductAlreadyExistsException.class})
+    public ResponseEntity<Object> handleProductAlreadyExistsException() {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = {ProductListAlreadyExistsException.class})
+    public ResponseEntity<Object> handleProductListAlreadyExistsException() {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
         return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
     }

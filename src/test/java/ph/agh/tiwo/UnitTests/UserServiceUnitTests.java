@@ -102,7 +102,7 @@ public class UserServiceUnitTests {
     }
 
     @Test
-    void updateUserTest(){
+    void updateUserByIdTest(){
         when(userRepository.findById(userId)).thenReturn(Optional.ofNullable(user3));
         when(userRepository.save(any(User.class))).thenReturn(user2);
         User updatedUser = this.userService.updateUser(userId,userDto);
@@ -116,9 +116,29 @@ public class UserServiceUnitTests {
     }
 
     @Test
+    void updateUserByEmailTest(){
+        when(userRepository.findByEmail(user3.getEmail())).thenReturn(Optional.ofNullable(user3));
+        when(userRepository.save(any(User.class))).thenReturn(user2);
+        User updatedUser = this.userService.updateUser(user3.getEmail(),userDto);
+        assertNotNull(updatedUser);
+        assertEquals(userId, updatedUser.getId());
+        assertEquals("test_name_1",updatedUser.getName());
+        assertEquals("test_surname_1",updatedUser.getSurname());
+        assertEquals("test_email_1",updatedUser.getEmail());
+        assertEquals("test_pass",updatedUser.getPassword());
+        assertEquals(productLists1, updatedUser.getProductLists());
+    }
+
+    @Test
     void updateUserNoSuchUserExceptionTest(){
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
         assertThrows(NoSuchUserException.class, () -> userService.updateUser(userId,userDto));
+    }
+
+    @Test
+    void updateUserByEmailNoSuchUserExceptionTest(){
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
+        assertThrows(NoSuchUserException.class, () -> userService.updateUser(user.getEmail(),userDto));
     }
 
     @Test

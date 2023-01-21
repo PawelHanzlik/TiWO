@@ -31,9 +31,10 @@ public class UserServiceDataProvider {
     public static List<User> usersInt;
     public static Set<ProductList> productListsInt;
     public static ProductList productListInt;
+
     static {
-        productList = ProductList.builder().id(2L).name("test_1").user(user).build();
-        productList1 = ProductList.builder().id(3L).name("test_1").user(user).build();
+        productList = ProductList.builder().id(2L).name("test_1").build();
+        productList1 = ProductList.builder().id(3L).name("test_1").build();
         productLists = new HashSet<>();
         productLists.add(productList);
         productLists1 = new HashSet<>();
