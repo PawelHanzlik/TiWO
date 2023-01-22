@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ph.agh.tiwo.dto.LoginDto;
 import ph.agh.tiwo.dto.UserDto;
+import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.entity.User;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
@@ -15,7 +16,10 @@ import ph.agh.tiwo.repository.UserRepository;
 import ph.agh.tiwo.security.JwtTokenGenerator;
 import ph.agh.tiwo.service.UserService;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tiwo/user")
@@ -61,9 +65,13 @@ public class UserController {
     }
 
     @GetMapping("/getLists")
-    public ResponseEntity<Set<ProductList>> getLists(@RequestParam String email){
+    public ResponseEntity<List<ProductList>> getLists(@RequestParam String email){
         User user = userService.getUserByEmail(email);
-        return new ResponseEntity<>(user.getProductLists(), HttpStatus.OK);
+        for (ProductList lista : user.getProductLists()) {
+            lista.getProducts().sort(Comparator.comparing(Product::getId));
+        }
+        return new ResponseEntity<>(user.getProductLists().stream().sorted(Comparator.comparing(ProductList::getId))
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
 }

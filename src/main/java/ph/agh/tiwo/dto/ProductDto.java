@@ -4,19 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ph.agh.tiwo.entity.Product;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductListDto {
+public class ProductDto {
 
     private String name;
-    private List<Product> products;
-    private String description;
-    private LocalDate dueTo;
+    private Double quantity;
+    private String type;
 }

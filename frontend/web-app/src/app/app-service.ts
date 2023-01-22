@@ -39,10 +39,62 @@ export class AppService {
   public displayLists(userEmail : string | null) : Observable<any>{
     return this.http.get(`${this.apiServerUrl}/tiwo/user/getLists?email=${userEmail}`)
   }
+
+  public addProductToList(product : Product , listName : string | null) : Observable<any>{
+    return this.http.post<Map<string, string>>(`${this.apiServerUrl}/tiwo/product/addProduct?listName=${listName}`,{
+      "name" : product.name,
+      "quantity" : product.quantity,
+      "type" : product.type
+    })
+  }
+
+  public updateProduct(product : Product , productId : string | null) : Observable<any>{
+    return this.http.put<Map<string, string>>(`${this.apiServerUrl}/tiwo/product/updateProduct?productId=${productId}`,{
+      "name" : product.name,
+      "quantity" : product.quantity,
+      "type" : product.type
+    })
+  }
+  public addProductListToUser(productList : ProductList , email : string | null) : Observable<any>{
+    return this.http.post<Map<string, string>>(`${this.apiServerUrl}/tiwo/productList/addProductList?userEmail=${email}`,{
+      "name" : productList.name,
+      "description" : productList.description,
+      "dueTo" : productList.dueTo,
+      "products" : []
+    })
+  }
+
+  public updateProductList(productList : ProductList , listId : string | null) : Observable<any>{
+    return this.http.put<Map<string, string>>(`${this.apiServerUrl}/tiwo/productList/updateProductList?listId=${listId}`,{
+      "name" : productList.name,
+      "description" : productList.description,
+      "dueTo" : productList.dueTo,
+      "products" : []
+    })
+  }
+
+  public deleteList<T>(listId : bigint) : Observable<T>{
+    return this.http.delete<T>(`${this.apiServerUrl}/tiwo/productList/deleteProductList?listId=${listId}`,{})
+  }
+
+  public deleteProduct<T>(productId : bigint) : Observable<T>{
+    return this.http.delete<T>(`${this.apiServerUrl}/tiwo/product/deleteProduct?productId=${productId}`,{})
+  }
 }
 interface user{
   name: String;
   surname: String;
   email: String;
   lists: [];
+}
+interface Product{
+  name : string
+  quantity : number
+  type : string
+}
+interface ProductList{
+  name : string
+  dueTo : Date
+  description : string
+  products : []
 }

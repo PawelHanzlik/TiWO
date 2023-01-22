@@ -8,7 +8,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
-import ph.agh.tiwo.exception.Classes.ProductAlreadyExistsException;
 import ph.agh.tiwo.repository.ProductRepository;
 import ph.agh.tiwo.service.ProductService;
 
@@ -87,11 +86,6 @@ public class ProductServiceUnitTests {
         assertEquals(10.0, newProduct.getCost());
     }
 
-    @Test
-    void addProductTest_ProductAlreadyExistsException(){
-        when(productRepository.findByName("test_1")).thenReturn(Optional.ofNullable(product));
-        assertThrows(ProductAlreadyExistsException.class, () -> productService.addProduct(product));
-    }
     @Test
     void updateProductByIdTestOK(){
         when(productRepository.findById(productId)).thenReturn(Optional.ofNullable(product2));

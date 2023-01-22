@@ -1,11 +1,27 @@
+<button id="wyloguj" (click)="logout()">
+  <a routerLink="/login">Wyloguj</a>
+</button>
 <div id = "lista" *ngFor="let row of lists">
-  <p>lista:</p>
+  <p>Nazwa : {{row.name}} , Zrealizowac do : {{row.dueTo}}
+    <button id="buttonUpdateProductList" (click) = "addListId(row.id)">Zmien</button>
+    <button id="buttonDeleteProductList" (click) = "deleteList(row.id)">Usun</button>
+  </p>
   <table>
+    <tr>
+      <td>Nazwa produktu</td>
+      <td>Gramatura</td>
+      <td>Rodzaj gramatury</td>
+    </tr>
     <tr *ngFor="let product of row.products">
       <td>{{product.name}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.type}}</td>
-      <td>{{product.cost}}</td>
+      <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmien</button>
+      <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usun</button>
     </tr>
+    <p>Opis : {{row.description}}</p>
+    <button id="buttonAddProduct" (click) = "addListName(row.name)">Dodaj produkt</button>
   </table>
 </div>
+<p></p>
+<button id="buttonAddProductList" (click) = "addNewList()">Dodaj nową listę</button>

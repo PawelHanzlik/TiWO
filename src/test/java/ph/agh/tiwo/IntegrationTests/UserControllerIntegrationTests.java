@@ -30,6 +30,7 @@ import ph.agh.tiwo.service.UserService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ph.agh.tiwo.DataProviders.UserIntegrationTestsDataProvider.*;
@@ -134,7 +135,6 @@ public class UserControllerIntegrationTests {
                         .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().is(200))
                 .andReturn();
-        System.out.println(login.getResponse().getContentAsString());
     }
 
     @Test
@@ -168,6 +168,21 @@ public class UserControllerIntegrationTests {
                         .param(csrfToken.getParameterName(), csrfToken.getToken())
                         .content(objectMapper.writeValueAsString(loginDto1)))
                 .andExpect(status().is(400))
+                .andReturn();
+    }
+
+    @Test
+    public void getListOkTest() throws Exception {
+        given(userService.getUserByEmail("testEmail")).willReturn(user);
+        var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
+        var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
+        var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
+        MvcResult login = mockMvc.perform(get("/tiwo/user/getLists?email="+"testEmail")
+                        .accept("*/*")
+                        .param("action", "signup")
+                        .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(), csrfToken.getToken()))
+                .andExpect(status().is(200))
                 .andReturn();
     }
 }

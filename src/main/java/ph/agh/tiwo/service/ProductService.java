@@ -3,6 +3,7 @@ package ph.agh.tiwo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ph.agh.tiwo.dto.ProductDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
@@ -43,10 +44,6 @@ public class ProductService {
     }
 
     public Product addProduct(Product product) throws ProductAlreadyExistsException {
-        Optional<Product> productOptional = this.productRepository.findByName(product.getName());
-        if (productOptional.isPresent()) {
-            throw new ProductAlreadyExistsException();
-        }
         return this.productRepository.save(product);
     }
 
@@ -99,13 +96,18 @@ public class ProductService {
 
     }
 
-    public Product updateProductAddProductList(String productName, ProductList productList) throws NoSuchProductException {
+    public void  updateProductAddProductList(String productName, ProductList productList) throws NoSuchProductException {
         Optional<Product> productOptional = this.productRepository.findByName(productName);
         if (productOptional.isEmpty()) {
             throw new NoSuchProductException();
         }
         Product product = productOptional.get();
         product.setProductList(productList);
-        return this.productRepository.save(product);
+        this.productRepository.save(product);
+    }
+
+    public Product buildProduct(ProductDto productDto, ProductList productList){
+        return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity())
+                .type(productDto.getType()).bought(false).productList(productList).build();
     }
 }

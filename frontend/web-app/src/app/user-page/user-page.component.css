@@ -1,0 +1,42 @@
+table {
+  width: 70%;
+}
+#button{
+  right: 20%;
+}
+table {
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+button{
+  background-color: cadetblue;
+}
+button:hover {
+  color: green;
+}
+#wyloguj{
+  position: absolute;
+  right: 5%;
+  top : 20%
+}
+#wyloguj a {
+  color: #000000;
+  text-decoration: none;
+}
+

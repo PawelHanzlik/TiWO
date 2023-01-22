@@ -10,6 +10,7 @@ import ph.agh.tiwo.exception.Classes.NoSuchProductListException;
 import ph.agh.tiwo.exception.Classes.ProductListAlreadyExistsException;
 import ph.agh.tiwo.repository.ProductListRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,5 +106,10 @@ public class ProductListService {
         ProductList productList = productListOptional.get();
         productList.setUser(user);
         return this.productListRepository.save(productList);
+    }
+
+    public ProductList buildProductList(ProductListDto productListDto, User user){
+        return ProductList.builder().name(productListDto.getName()).description(productListDto.getDescription())
+                .dueTo(productListDto.getDueTo()).products(Collections.emptyList()).user(user).build();
     }
 }

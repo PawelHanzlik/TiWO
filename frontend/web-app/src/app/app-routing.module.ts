@@ -5,13 +5,17 @@ import {LoginComponent} from "./login/login.component";
 import {UserPageComponent} from "./user-page/user-page.component";
 import {RegisterComponent} from "./register/register.component";
 import {RegisterResultComponent} from "./register-result/register-result.component";
+import {AddProductComponent} from "./add-product/add-product.component";
+import {AddProductListComponent} from "./add-product-list/add-product-list.component";
 
 const routes: Routes =[
   {path: '', component: MainPageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'user-page', component: UserPageComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'register-result', component: RegisterResultComponent}
+  {path: 'register-result', component: RegisterResultComponent},
+  {path: 'add-product', component: AddProductComponent},
+  {path: 'add-product-list', component: AddProductListComponent}
 ]
 
 @NgModule({

@@ -1,8 +1,6 @@
 package ph.agh.tiwo.entity;
 
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
