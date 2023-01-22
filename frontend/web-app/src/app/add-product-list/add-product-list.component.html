@@ -1,0 +1,15 @@
+<div id="form">
+  <label class="centered" id="AddTitle" >NOWA LISTA PRODUKTOW</label>
+  <label class="centered" id="NameTitle" for="Name">Name</label>
+  <input class="centered" type="text" [defaultValue]="" id="Name" name="Name" (change)="assignName($event.target)">
+  <label class="centered" id="DescriptionTitle" for="Description">Description</label>
+  <label class="centered" id="DueToTitle" for="DueTo">Due to</label>
+  <input class="centered" type="text" [defaultValue]="" id="Description" name="Description" (change)="assignDescription($event.target)">
+  <input class="centered" type="text" [defaultValue]="" id="DueTo" name="DueTo" (change)="assignDueTo($event.target)">
+
+  <label class="centered" id="error" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
+  <button id="button" class="button">
+    <a (click)="addProductListToUser()">Dodaj nowa liste produktow</a>
+  </button>
+
+</div>

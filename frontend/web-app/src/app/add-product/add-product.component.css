@@ -1,0 +1,55 @@
+.centered {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15pt;
+}
+
+#AddTitle{
+  position: absolute;
+  top: 22%;
+  left: 48%;
+}
+#Name{
+  position: absolute;
+  top: 29%;
+  left: 45%;
+}
+#NameTitle{
+  position: absolute;
+  top: 25%;
+  left: 38%;
+}
+#QuantityTitle{
+  position: absolute;
+  top: 35%;
+  left: 39%;
+}
+#Quantity{
+  position: absolute;
+  top: 39%;
+  left: 45%;
+}
+#Type{
+  position: absolute;
+  top: 49%;
+  left: 45%;
+}
+#TypeTitle{
+  position: absolute;
+  top: 45%;
+  left: 38%;
+}
+.button {
+  position: absolute;
+  top: 55%;
+  right: 40%;
+  font-size: 15pt;
+}
+
+#error{
+  font-size: 15pt;
+  top: 65%;
+  left: 45%;
+}
