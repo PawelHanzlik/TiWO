@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import ph.agh.tiwo.dto.ProductDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
 import ph.agh.tiwo.repository.ProductRepository;
@@ -152,5 +153,21 @@ public class ProductServiceUnitTests {
     void deleteProductByNameNoSuchProductExceptionTestOK(){
         when(productRepository.findByName(product.getName())).thenReturn(Optional.empty());
         assertThrows(NoSuchProductException.class, () -> productService.deleteProduct(product.getName()));
+    }
+
+    @Test
+    void buildProductOk(){
+        Product product = this.productService.buildProduct(
+                new ProductDto("test",1.0,"test"),productList);
+        assertEquals(product.getName(), "test");
+        assertEquals(product.getQuantity(),1.0);
+        assertEquals(product.getType(), "test");
+    }
+
+    @Test
+    void updateProductAddProductNameNoSuchProductExceptionTestOK(){
+        when(productRepository.findByName("test")).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductException.class,
+                () -> productService.updateProductAddProductList("test",productList));
     }
 }

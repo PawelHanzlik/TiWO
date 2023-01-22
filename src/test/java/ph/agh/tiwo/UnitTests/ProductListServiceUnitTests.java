@@ -164,4 +164,17 @@ public class ProductListServiceUnitTests {
         assertThrows(NoSuchProductListException.class, () -> productListService.deleteProductList(productList.getName()));
     }
 
+    @Test
+    void buildProductList(){
+        ProductList productList = this.productListService.buildProductList(productListDto,user);
+        assertEquals(productList.getName(), productListDto.getName());
+        assertEquals(productList.getDescription(), productListDto.getDescription());
+    }
+
+    @Test
+    void updateProductListAddUser(){
+        when(this.productListRepository.findByName("test")).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductListException.class,
+                () -> productListService.updateProductListAddUser("test",user));
+    }
 }

@@ -1,17 +1,18 @@
 package ph.agh.tiwo.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductDto {
 
     private String name;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Double quantity;
     private String type;
 }

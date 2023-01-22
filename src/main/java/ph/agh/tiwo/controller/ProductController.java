@@ -31,8 +31,8 @@ public class ProductController {
         if (optionalProductList.isPresent()){
             ProductList productList = optionalProductList.get();
             Product product = this.productService.buildProduct(productDto, productList);
-            this.productService.addProduct(product);
-            return new ResponseEntity<>(product, HttpStatus.CREATED);
+            Product addedProduct = this.productService.addProduct(product);
+            return new ResponseEntity<>(addedProduct, HttpStatus.CREATED);
         }
         else
             throw new NoSuchProductListException();

@@ -15,8 +15,9 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
-import ph.agh.tiwo.controller.UserController;
-import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
+import ph.agh.tiwo.controller.ProductListController;
+import ph.agh.tiwo.dto.ProductListDto;
+import ph.agh.tiwo.entity.User;
 import ph.agh.tiwo.repository.ProductListRepository;
 import ph.agh.tiwo.repository.ProductRepository;
 import ph.agh.tiwo.repository.UserRepository;
@@ -28,16 +29,16 @@ import ph.agh.tiwo.service.ProductListService;
 import ph.agh.tiwo.service.ProductService;
 import ph.agh.tiwo.service.UserService;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ph.agh.tiwo.DataProviders.UserIntegrationTestsDataProvider.*;
+import java.util.Optional;
 
-@WebMvcTest(UserController.class)
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ph.agh.tiwo.DataProviders.ProductListIntegrationTestsDataProvider.*;
+
+@WebMvcTest(ProductListController.class)
 @AutoConfigureMockMvc(addFilters = false)
-public class UserControllerIntegrationTests {
+public class ProductListControllerIntegrationTests {
 
     @MockBean
     private UserRepository userRepository;
@@ -48,7 +49,7 @@ public class UserControllerIntegrationTests {
     @MockBean
     private ProductListRepository productListRepository;
     @MockBean
-    private  UserService userService;
+    private UserService userService;
 
     @MockBean
     private ProductService productService;
@@ -57,7 +58,7 @@ public class UserControllerIntegrationTests {
     private ProductListService productListService;
 
     @Autowired
-    private  MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
     private JwtTokenGenerator jwtTokenGenerator;
@@ -85,100 +86,70 @@ public class UserControllerIntegrationTests {
 
     @MockBean
     private CommandLineRunner commandLineRunner;
+
     @Test
-    public void registrationOkTest() throws Exception {
-        given(userService.buildUser(userDto,password)).willReturn(user);
-        System.out.println(objectMapper.writeValueAsString(userDto));
+    public void addProductListOkTest() throws Exception {
+        given(userRepository.findByEmail("test")).willReturn(Optional.ofNullable(User.builder().email("test").build()));
+        given(productListService.buildProductList(new ProductListDto(),User.builder().email("test").build()))
+                .willReturn(productList);
+        given(productListService.addProductList(productList)).willReturn(productList1);
         var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
         var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
         var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
-        MvcResult registration = mockMvc.perform(post("/tiwo/user/register?password="+password)
-                        .contentType(MediaType.APPLICATION_JSON)
+        MvcResult addProduct = mockMvc.perform(post("/tiwo/productList/addProductList?userEmail="+"test")
                         .accept("*/*")
                         .param("action", "signup")
                         .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .param(csrfToken.getParameterName(), csrfToken.getToken())
-                        .content(objectMapper.writeValueAsString(userDto)))
+                        .content(objectMapper.writeValueAsString(productListDto)))
                 .andExpect(status().is(201))
                 .andReturn();
     }
 
     @Test
-    public void registrationUserAlreadyExistsTest() throws Exception {
-        given(userService.buildUser(userDto,password)).willReturn(user);
-        given(userService.addUser(any())).willThrow(UserAlreadyExistsException.class);
+    public void addProductListNoUserTest() throws Exception {
+        given(userRepository.findByEmail("test")).willReturn(Optional.empty());
+        given(productListService.buildProductList(new ProductListDto(),User.builder().email("test").build()))
+                .willReturn(productList);
+        given(productListService.addProductList(productList)).willReturn(productList1);
         var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
         var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
         var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
-        MvcResult registration = mockMvc.perform(post("/tiwo/user/register?password="+password)
-                        .contentType(MediaType.APPLICATION_JSON)
+        MvcResult addProduct = mockMvc.perform(post("/tiwo/productList/addProductList?userEmail="+"test")
                         .accept("*/*")
                         .param("action", "signup")
                         .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
-                        .param(csrfToken.getParameterName(), csrfToken.getToken())
-                        .content(objectMapper.writeValueAsString(userDto)))
-                .andExpect(status().is(409))
-                .andReturn();
-    }
-
-    @Test
-    public void loginOkTest() throws Exception {
-        given(userService.getUserByEmail(loginDto.getEmail())).willReturn(user);
-        var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
-        var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
-        var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
-        MvcResult login = mockMvc.perform(post("/tiwo/user/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .accept("*/*")
-                        .param("action", "signup")
-                        .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
                         .param(csrfToken.getParameterName(), csrfToken.getToken())
-                        .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().is(200))
-                .andReturn();
-    }
-
-    @Test
-    public void loginNoSuchUserTest() throws Exception {
-        given(userService.getUserByEmail(loginDto.getEmail())).willReturn(null);
-        var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
-        var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
-        var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
-        MvcResult login = mockMvc.perform(post("/tiwo/user/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept("*/*")
-                        .param("action", "signup")
-                        .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
-                        .param(csrfToken.getParameterName(), csrfToken.getToken())
-                        .content(objectMapper.writeValueAsString(loginDto)))
+                        .content(objectMapper.writeValueAsString(productListDto)))
                 .andExpect(status().is(404))
                 .andReturn();
     }
 
     @Test
-    public void loginWrongPasswordTest() throws Exception {
-        given(userService.getUserByEmail(loginDto1.getEmail())).willReturn(user);
+    public void updateProductListOkTest() throws Exception {
+        given(productListService.updateProductList(1L,productListDto)).willReturn(productList1);
         var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
         var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
         var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
-        MvcResult login = mockMvc.perform(post("/tiwo/user/login")
-                        .contentType(MediaType.APPLICATION_JSON)
+        MvcResult addProduct = mockMvc.perform(put("/tiwo/productList/updateProductList?listId="+"1")
                         .accept("*/*")
                         .param("action", "signup")
                         .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .param(csrfToken.getParameterName(), csrfToken.getToken())
-                        .content(objectMapper.writeValueAsString(loginDto1)))
-                .andExpect(status().is(400))
+                        .content(objectMapper.writeValueAsString(productListDto)))
+                .andExpect(status().is(200))
                 .andReturn();
     }
 
     @Test
-    public void getListOkTest() throws Exception {
-        given(userService.getUserByEmail("testEmail")).willReturn(user);
+    public void deleteProductListOkTest() throws Exception {
         var TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
         var httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
         var csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
-        MvcResult login = mockMvc.perform(get("/tiwo/user/getLists?email="+"testEmail")
+        MvcResult addProduct = mockMvc.perform(delete("/tiwo/productList/deleteProductList?listId="+"1")
                         .accept("*/*")
                         .param("action", "signup")
                         .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
