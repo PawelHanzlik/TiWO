@@ -85,7 +85,7 @@ describe('UserPageComponent', () => {
     localStorage.setItem("token","token")
     component.logout()
     fixture.detectChanges()
-    expect(localStorage.getItem("token")).toBeNull()
+    expect(localStorage.getItem("token")).toEqual('')
   });
 
   it('when deleteList called with success displayLists()', fakeAsync(() => {

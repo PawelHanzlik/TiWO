@@ -64,7 +64,6 @@ export class AddProductListComponent implements OnInit {
         }
       );
     }else{
-      console.log(localStorage.getItem("listId"))
       this.appService.updateProductList(this.productList, localStorage.getItem("listId")).subscribe(
         () => {
           this.router.navigate(['/user-page'])

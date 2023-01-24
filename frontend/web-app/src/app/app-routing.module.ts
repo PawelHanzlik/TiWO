@@ -7,15 +7,16 @@ import {RegisterComponent} from "./register/register.component";
 import {RegisterResultComponent} from "./register-result/register-result.component";
 import {AddProductComponent} from "./add-product/add-product.component";
 import {AddProductListComponent} from "./add-product-list/add-product-list.component";
+import {AuthGuard} from "./AuthGuard";
 
 const routes: Routes =[
   {path: '', component: MainPageComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'user-page', component: UserPageComponent},
+  {path: 'user-page', component: UserPageComponent, canActivate : [AuthGuard]},
   {path: 'register', component: RegisterComponent},
   {path: 'register-result', component: RegisterResultComponent},
-  {path: 'add-product', component: AddProductComponent},
-  {path: 'add-product-list', component: AddProductListComponent}
+  {path: 'add-product', component: AddProductComponent, canActivate : [AuthGuard]},
+  {path: 'add-product-list', component: AddProductListComponent, canActivate : [AuthGuard]}
 ]
 
 @NgModule({

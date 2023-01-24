@@ -1,6 +1,4 @@
-<button id="wyloguj" (click)="logout()">
-  <a routerLink="/login">Wyloguj</a>
-</button>
+<button id="wyloguj" (click)="logout()">Wyloguj</button>
 <div id = "lista" *ngFor="let row of lists">
   <p>Nazwa : {{row.name}} , Zrealizowac do : {{row.dueTo}}
     <button id="buttonUpdateProductList" (click) = "addListId(row.id)">Zmien</button>

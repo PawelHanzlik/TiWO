@@ -29,7 +29,10 @@ export class UserPageComponent implements OnInit {
   }
 
   logout(){
-    localStorage.removeItem("token")
+    console.log("grrgg")
+    localStorage.setItem("token", "")
+    console.log(localStorage.getItem("token"))
+    this.router.navigate(['/login'])
   }
 
   addListName(listName : string){
