@@ -5,7 +5,12 @@
   transform: translate(-50%, -50%);
   font-size: 15pt;
 }
-
+select > option{
+  font-size: 15pt;
+}
+select{
+  font-size: 15pt;
+}
 #AddTitle{
   position: absolute;
   top: 22%;
@@ -15,6 +20,11 @@
   position: absolute;
   top: 29%;
   left: 45%;
+}
+#NameSelect{
+  position: absolute;
+  top: 27%;
+  left: 55%;
 }
 #NameTitle{
   position: absolute;
@@ -36,6 +46,11 @@
   top: 49%;
   left: 45%;
 }
+#TypeSelect{
+  position: absolute;
+  top: 47%;
+  left: 55%;
+}
 #TypeTitle{
   position: absolute;
   top: 45%;
@@ -53,3 +68,4 @@
   top: 65%;
   left: 45%;
 }
+

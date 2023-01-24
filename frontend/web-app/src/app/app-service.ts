@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {mapTo, Observable, tap} from "rxjs";
@@ -27,7 +27,7 @@ export class AppService {
     }).pipe(tap(token => this.loginToken(email, token)), mapTo(true))
   }
 
-  public register(user: user, password: String): Observable<any> {
+  public register(user: user, password: String ): Observable<any>{
     return this.http.post<Map<string, string>>(`${this.apiServerUrl}/tiwo/user/register?password=${password}`,{
       "name" : user.name,
       "surname" : user.surname,

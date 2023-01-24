@@ -3,7 +3,7 @@
   <label class="centered" id="EmailTitle" for="Email">Email</label>
   <label class="centered" id="PasswordTitle" for="Password">Password</label>
   <input class="centered" type="text" [defaultValue]="" id="Email" name="Email" (change)="assignLogin($event.target)">
-  <input class="centered" type="text" [defaultValue]="" id="Password" name="Password" (change)="assignPassword($event.target)" >
+  <input class="centered" type="password" [defaultValue]="" id="Password" name="Password" (change)="assignPassword($event.target)" >
 
   <label class="centered" id="Register">
     <a id = "link" routerLink="/register">Register</a>

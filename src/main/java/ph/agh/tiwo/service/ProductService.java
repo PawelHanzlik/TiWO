@@ -7,7 +7,6 @@ import ph.agh.tiwo.dto.ProductDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
-import ph.agh.tiwo.exception.Classes.ProductAlreadyExistsException;
 import ph.agh.tiwo.repository.ProductRepository;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
-    public Product addProduct(Product product) throws ProductAlreadyExistsException {
+    public Product addProduct(Product product){
         return this.productRepository.save(product);
     }
 

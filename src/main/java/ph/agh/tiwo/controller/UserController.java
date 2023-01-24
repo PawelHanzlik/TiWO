@@ -41,15 +41,19 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
-        User user = this.userService.getUserByEmail(loginDto.getEmail());
-        if (user == null)
-            throw new NoSuchUserException();
-        if (user.getPassword().equals(loginDto.getPassword()))
-            return new ResponseEntity<>(jwtTokenGenerator.generateToken(
-                    new UsernamePasswordAuthenticationToken(user.getEmail(),
-            user.getPassword(), null)),HttpStatus.OK);
-        else
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        try {
+            User user = this.userService.getUserByEmail(loginDto.getEmail());
+            if (user == null)
+                throw new NoSuchUserException();
+            if (user.getPassword().equals(loginDto.getPassword()))
+                return new ResponseEntity<>(jwtTokenGenerator.generateToken(
+                        new UsernamePasswordAuthenticationToken(user.getEmail(),
+                                user.getPassword(), null)), HttpStatus.OK);
+            else
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }catch (NoSuchUserException e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/register")

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
 
@@ -14,8 +14,9 @@ export class AddProductListComponent implements OnInit {
   description: productListData;
   productList : ProductList
   addOk: boolean
-
+  today : string
   constructor(private appService: AppService, private router: Router) {
+    this.today = new Date().getFullYear() + '-' + new Date().getMonth()+1 + '-' + new Date().getDate()
     this.name = {
       value: ""
     }

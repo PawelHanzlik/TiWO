@@ -1,14 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MainPageComponent } from './main-page.component';
+import {MainPageComponent} from './main-page.component';
+import {AppService} from "../app-service";
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
   let fixture: ComponentFixture<MainPageComponent>;
-
+  let appServiceMock : jasmine.SpyObj<AppService>
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainPageComponent ]
+      declarations: [ MainPageComponent ],
+      providers : [{provide: AppService, useValue: appServiceMock}]
     })
     .compileComponents();
   });

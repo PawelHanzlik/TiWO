@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductList} from "../dto/ProductList";
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
@@ -23,7 +23,6 @@ export class UserPageComponent implements OnInit {
   displayLists(){
     this.appService.displayLists(localStorage.getItem("email")).subscribe(
       (response) => {
-        console.log(response)
         this.lists = response
       }
     )

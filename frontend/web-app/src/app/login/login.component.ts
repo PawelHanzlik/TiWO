@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
 
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginOk: boolean
   loginResponse: string
 
-  constructor(private appService: AppService, private router: Router) {
+  constructor(public appService: AppService, private router: Router) {
 
     this.userLogin = {
       value: ""
@@ -45,6 +45,6 @@ export class LoginComponent implements OnInit {
 
 }
 
-interface loginData{
+export interface loginData{
   value: string;
 }

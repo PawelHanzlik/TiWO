@@ -1,5 +1,3 @@
-import {ProductList} from "./ProductList";
-
 export interface Product {
   id : bigint
   name : string

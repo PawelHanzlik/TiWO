@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
 
@@ -14,6 +14,9 @@ export class AddProductComponent implements OnInit {
   type: productData;
   product : Product
   addOk: boolean
+
+  selectedName : string = ""
+  selectedType : string = ""
   constructor(private appService: AppService, private router: Router) {
     this.name = {
       value: ""
@@ -38,6 +41,11 @@ export class AddProductComponent implements OnInit {
     this.product.name = value.value;
   }
 
+  assignNameSelect(value: any) {
+    this.name.value = this.selectedName
+    this.product.name = value.value;
+  }
+
   assignQuantity(value: any) {
     this.quantity = value.value;
     this.product.quantity = value.value;
@@ -45,6 +53,11 @@ export class AddProductComponent implements OnInit {
 
   assignType(value: any) {
     this.type.value = value.value;
+    this.product.type = value.value;
+  }
+
+  assignTypeSelect(value: any) {
+    this.type.value = this.selectedType;
     this.product.type = value.value;
   }
   ngOnInit(): void {
@@ -75,7 +88,7 @@ export class AddProductComponent implements OnInit {
 interface productData{
   value: string;
 }
-interface Product{
+export interface Product{
   name : string
   quantity : number
   type : string

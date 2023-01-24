@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
 
@@ -66,10 +66,10 @@ export class RegisterComponent implements OnInit {
     );
   }
 }
-interface registerData{
+export interface registerData{
   value: String;
 }
-interface user{
+export  interface user{
   name: String;
   surname: String;
   email: String;

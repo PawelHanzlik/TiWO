@@ -42,11 +42,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(value = {ProductAlreadyExistsException.class})
-    public ResponseEntity<Object> handleProductAlreadyExistsException() {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
-        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
-    }
 
     @ExceptionHandler(value = {ProductListAlreadyExistsException.class})
     public ResponseEntity<Object> handleProductListAlreadyExistsException() {
