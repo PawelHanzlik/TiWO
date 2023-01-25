@@ -28,6 +28,10 @@ export class UserPageComponent implements OnInit {
     )
   }
 
+  async cross(productId : bigint){
+    await this.appService.cross(productId).toPromise()
+    this.displayLists()
+  }
   logout(){
     console.log("grrgg")
     localStorage.setItem("token", "")

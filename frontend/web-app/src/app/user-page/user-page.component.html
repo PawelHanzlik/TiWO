@@ -10,8 +10,8 @@
       <td>Gramatura</td>
       <td>Rodzaj gramatury</td>
     </tr>
-    <tr *ngFor="let product of row.products">
-      <td>{{product.name}}</td>
+    <tr *ngFor="let product of row.products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
+      <td (click) = "cross(product.id)">{{product.name}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.type}}</td>
       <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmien</button>

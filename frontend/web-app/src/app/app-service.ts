@@ -80,6 +80,10 @@ export class AppService {
   public deleteProduct<T>(productId : bigint) : Observable<T>{
     return this.http.delete<T>(`${this.apiServerUrl}/tiwo/product/deleteProduct?productId=${productId}`,{})
   }
+
+  public cross<T>(productId : bigint) : Observable<T>{
+    return this.http.put<T>(`${this.apiServerUrl}/tiwo/product/updateProductBought?productId=${productId}`,{})
+  }
 }
 interface user{
   name: String;

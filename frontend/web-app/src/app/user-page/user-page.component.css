@@ -39,4 +39,6 @@ button:hover {
   color: #000000;
   text-decoration: none;
 }
-
+.crossed{
+ text-decoration: line-through;
+}
