@@ -138,6 +138,20 @@ public class ProductControllerIntegrationTests {
                 .andExpect(status().is(404))
                 .andReturn();
     }
+
+    @Test
+    public void updateProductBoughtOkTest_UserLogged() throws Exception {
+        Long id = this.productService.getAllProducts().get(0).getId();
+        mockMvc.perform(put("/tiwo/product/updateProductBought?productId="+id)
+                        .accept("*/*")
+                        .param("action", "signup")
+                        .header(HttpHeaders.AUTHORIZATION,token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(product)))
+                .andExpect(status().is(200))
+                .andReturn();
+    }
+
     @Test
     public void deleteProductOkTest_UserLogged() throws Exception {
         Long id = this.productService.getAllProducts().get(0).getId();

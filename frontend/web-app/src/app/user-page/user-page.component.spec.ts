@@ -20,6 +20,10 @@ class MockUserPageService{
   deleteProduct(productId : bigint) : Observable<any>{
     return  of(Array.of());
   }
+
+  cross(productId : bigint) : Observable<any>{
+    return  of(Array.of());
+  }
 }
 describe('UserPageComponent', () => {
   let component: UserPageComponent;
@@ -90,6 +94,14 @@ describe('UserPageComponent', () => {
 
   it('when deleteList called with success displayLists()', fakeAsync(() => {
     component.deleteList(BigInt(1))
+    fixture.detectChanges()
+    spyOn(component, 'displayLists').and.callThrough()
+    component.ngOnInit()
+    expect(component.displayLists).toHaveBeenCalled()
+  }));
+
+  it('when deleteList called with success displayLists()', fakeAsync(() => {
+    component.cross(BigInt(1))
     fixture.detectChanges()
     spyOn(component, 'displayLists').and.callThrough()
     component.ngOnInit()

@@ -96,6 +96,16 @@ describe('AppServiceService', () => {
     })
   }));
 
+  it('when updateProductBought method response was made',fakeAsync(() => {
+    service.cross(BigInt(1)).subscribe(response => {
+      expect(response).toBeTruthy();    });
+
+    const request = httpMock.expectOne({
+      method: 'PUT',
+      url: environment.apiBaseUrl + '/tiwo/product/updateProductBought?productId='+1,
+    })
+  }));
+
   it('when addList method response was made',fakeAsync(() => {
     let productList : ProductList= {
       name: "",
