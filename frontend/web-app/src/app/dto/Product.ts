@@ -5,4 +5,5 @@ export interface Product {
   bought : boolean
   quantity : number
   type : string
+  url : string
 }

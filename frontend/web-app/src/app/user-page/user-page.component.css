@@ -42,3 +42,10 @@ button:hover {
 .crossed{
  text-decoration: line-through;
 }
+img{
+  height: 200px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

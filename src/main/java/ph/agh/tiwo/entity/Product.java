@@ -35,6 +35,9 @@ public class Product {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "url")
+    private String url;
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JsonIgnore
     private ProductList productList;

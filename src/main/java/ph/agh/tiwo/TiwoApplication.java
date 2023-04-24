@@ -12,6 +12,7 @@ import ph.agh.tiwo.repository.UserRepository;
 import ph.agh.tiwo.service.ProductListService;
 import ph.agh.tiwo.service.ProductService;
 import ph.agh.tiwo.service.UserService;
+import ph.agh.tiwo.util.UrlMap;
 
 import java.time.LocalDate;
 
@@ -32,10 +33,10 @@ public class TiwoApplication {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return args -> {
 			productService.addProduct(Product.builder().name("chleb").cost(5.0).bought(false)
-					.quantity(2.0).type("sztuk").build());
+					.quantity(2.0).type("sztuk").url(UrlMap.getUrl("chleb")).build());
 
 			productService.addProduct(Product.builder().name("mleko").cost(3.0).bought(false)
-					.quantity(3.0).type("sztuk").build());
+					.quantity(3.0).type("sztuk").url(UrlMap.getUrl("mleko")).build());
 
 			ProductList pierwsza = productListService.addProductList(ProductList.builder().name("pierwszaLista")
 					.description("pierwsza testowa").dueTo(LocalDate.now().plusDays(2)).build());
@@ -45,10 +46,10 @@ public class TiwoApplication {
 			productService.updateProductAddProductList("mleko", pierwsza);
 
 			productService.addProduct(Product.builder().name("maslo").cost(7.0).bought(false)
-					.quantity(1.0).type("kostka").build());
+					.quantity(1.0).type("kostka").url(UrlMap.getUrl("maslo")).build());
 
 			productService.addProduct(Product.builder().name("ciastka").cost(10.0).bought(false)
-					.quantity(1.0).type("sztuk").build());
+					.quantity(1.0).type("sztuk").url(UrlMap.getUrl("ciastka")).build());
 
 			ProductList druga =
 					productListService.addProductList(ProductList.builder().name("drugaLista").description("druga testowa")

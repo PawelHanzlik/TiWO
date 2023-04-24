@@ -15,4 +15,5 @@ public class ProductDto {
     @JsonSerialize(using = ToStringSerializer.class)
     private Double quantity;
     private String type;
+    private String url;
 }

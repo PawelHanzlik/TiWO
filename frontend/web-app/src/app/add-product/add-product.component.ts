@@ -30,7 +30,8 @@ export class AddProductComponent implements OnInit {
     this.product = {
       name: "",
       quantity: 0,
-      type:""
+      type:"",
+      url:""
     }
 
     this.addOk = false
@@ -92,4 +93,5 @@ export interface Product{
   name : string
   quantity : number
   type : string
+  url : string
 }

@@ -8,6 +8,7 @@ import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
 import ph.agh.tiwo.repository.ProductRepository;
+import ph.agh.tiwo.util.UrlMap;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,6 +58,7 @@ public class ProductService {
         product.setBought(productToUpdate.getBought());
         product.setQuantity(productToUpdate.getQuantity());
         product.setType(productToUpdate.getType());
+        product.setUrl(productToUpdate.getUrl());
         return this.productRepository.save(product);
     }
 
@@ -71,6 +73,7 @@ public class ProductService {
         product.setBought(productToUpdate.getBought());
         product.setQuantity(productToUpdate.getQuantity());
         product.setType(productToUpdate.getType());
+        product.setUrl(productToUpdate.getUrl());
         return this.productRepository.save(product);
     }
 
@@ -107,6 +110,6 @@ public class ProductService {
 
     public Product buildProduct(ProductDto productDto, ProductList productList){
         return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity())
-                .type(productDto.getType()).bought(false).productList(productList).build();
+                .type(productDto.getType()).bought(false).url(UrlMap.getUrl(productDto.getName())).productList(productList).build();
     }
 }

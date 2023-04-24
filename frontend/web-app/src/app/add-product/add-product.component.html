@@ -3,6 +3,8 @@
   <label class="centered" id="NameTitle" for="Name">Name</label>
   <input class="centered" type="text" [value]="selectedName" id="Name" name="Name" (change)="assignName($event.target)">
   <select name="NameSelect" id="NameSelect" [(ngModel)] = "selectedName" (change)="assignNameSelect($event.target)">
+    <option value="drukarka">drukarka</option>
+    <option value="wiertarka">wiertarka</option>
     <option value="chleb">chleb</option>
     <option value="maslo">maslo</option>
     <option value="szynka">szynka</option>

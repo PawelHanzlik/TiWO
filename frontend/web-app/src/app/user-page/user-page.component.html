@@ -9,11 +9,13 @@
       <td>Nazwa produktu</td>
       <td>Gramatura</td>
       <td>Rodzaj gramatury</td>
+      <td>Zdjecie</td>
     </tr>
     <tr *ngFor="let product of row.products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
       <td (click) = "cross(product.id)">{{product.name}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.type}}</td>
+      <td><img src="{{product.url}}" alt=""/></td>
       <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmien</button>
       <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usun</button>
     </tr>
