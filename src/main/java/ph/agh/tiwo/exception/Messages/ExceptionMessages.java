@@ -16,6 +16,7 @@ public enum ExceptionMessages {
 
     PRODUCT_ALREADY_EXISTS("Product already exists"),
     NEGATIVE_MONEY("Incorrect money amount"),
+    NEGATIVE_QUANTITY("Incorrect quantity amount"),
     PRODUCT_LIST_ALREADY_EXISTS("Product list already exists"),
     WAREHOUSE_ALREADY_EXISTS("Warehouse already exists");
     @Getter

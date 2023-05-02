@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import ph.agh.tiwo.dto.ProductDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
+import ph.agh.tiwo.entity.Warehouse;
 import ph.agh.tiwo.exception.Classes.NoSuchProductListException;
 import ph.agh.tiwo.repository.ProductListRepository;
 import ph.agh.tiwo.repository.ProductRepository;
 import ph.agh.tiwo.service.ProductService;
+import ph.agh.tiwo.service.WarehouseService;
 
 import java.util.Optional;
 
@@ -22,12 +24,14 @@ public class ProductController {
 
     private final ProductListRepository productListRepository;
     private final ProductRepository productRepository;
+    private final WarehouseService warehouseService;
 
     public ProductController(ProductService productService, ProductListRepository productListRepository,
-                             ProductRepository productRepository) {
+                             ProductRepository productRepository, WarehouseService warehouseService) {
         this.productService = productService;
         this.productListRepository = productListRepository;
         this.productRepository = productRepository;
+        this.warehouseService = warehouseService;
     }
 
     @PostMapping("/addProduct")
@@ -61,6 +65,12 @@ public class ProductController {
     @DeleteMapping("/deleteProduct")
     public ResponseEntity<Void> deleteProduct(@RequestParam Long productId){
         this.productService.deleteProduct(productId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/buyProduct")
+    public ResponseEntity<Void> buyProduct(@RequestParam String productName, Double productQuantity){
+        this.warehouseService.buyProduct(productName, productQuantity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

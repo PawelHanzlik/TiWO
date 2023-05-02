@@ -66,4 +66,10 @@ public class GlobalExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
         return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(value = {NegativeQuantityException.class})
+    public ResponseEntity<Object> handleNegativeQuantityException() {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 }

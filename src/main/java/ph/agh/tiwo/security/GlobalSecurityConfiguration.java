@@ -46,7 +46,8 @@ public class GlobalSecurityConfiguration {
                 .addFilter(getEmailAndPasswordAuthenticationFilter())
                 .addFilterAfter(new JwtTokenVerifierFilter(tokenVerifier), EmailAndPasswordAuthenticationFilter.class).
                 authorizeHttpRequests().antMatchers("/tiwo/user/login", "/login").permitAll().and().
-                authorizeHttpRequests().antMatchers("/tiwo/user/register", "/register").permitAll()
+                authorizeHttpRequests().antMatchers("/tiwo/user/register", "/register").permitAll().and().
+                authorizeHttpRequests().antMatchers("/tiwo/user/warehouse", "/warehouse").permitAll()
                 .anyRequest().authenticated();
         return security.build();
     }

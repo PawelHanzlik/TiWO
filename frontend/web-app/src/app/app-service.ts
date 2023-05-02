@@ -96,6 +96,10 @@ export class AppService {
   public displayProducts(name : string | null) : Observable<any>{
     return this.http.get(`${this.apiServerUrl}/tiwo/warehouse/getProducts?name=${name}`)
   }
+
+  public buyProduct<T>(productName : string, productQuantity : number) : Observable<any>{
+    return this.http.put<T>(`${this.apiServerUrl}/tiwo/product/buyProduct?productName=${productName}&productQuantity=${productQuantity}`,{})
+  }
 }
 interface user{
   name: String;

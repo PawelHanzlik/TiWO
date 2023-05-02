@@ -99,4 +99,10 @@ export class UserPageComponent implements OnInit {
     this.displayLists()
     this.displayUser()
   }
+
+  async buyProduct(productName : string, productQuantity : number){
+    await this.appService.buyProduct(productName, productQuantity).toPromise()
+    this.displayLists()
+    this.displayUser()
+  }
 }

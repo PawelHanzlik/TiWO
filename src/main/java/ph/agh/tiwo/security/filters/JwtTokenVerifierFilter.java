@@ -42,8 +42,9 @@ public class JwtTokenVerifierFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return request.getServletPath().equals("/login") || request.getServletPath().equals("/register")
-                || request.getServletPath().equals("/tiwo/user/login") || request.getServletPath().equals("/tiwo/user/register");
+        return request.getServletPath().equals("/login") || request.getServletPath().equals("/register") ||
+                request.getServletPath().equals("/warehouse") || request.getServletPath().equals("/tiwo/user/login") ||
+                request.getServletPath().equals("/tiwo/user/register") || request.getServletPath().equals("/tiwo/user/warehouse");
     }
 
     protected String getJwtFromRequest(HttpServletRequest request) {
