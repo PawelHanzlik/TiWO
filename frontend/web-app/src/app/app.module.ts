@@ -16,6 +16,7 @@ import {RegisterResultComponent} from './register-result/register-result.compone
 import {AuthInterceptor} from "./AuthInterceptor";
 import {AddProductComponent} from './add-product/add-product.component';
 import {AddProductListComponent} from './add-product-list/add-product-list.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {AddProductListComponent} from './add-product-list/add-product-list.compo
     RegisterComponent,
     RegisterResultComponent,
     AddProductComponent,
-    AddProductListComponent
+    AddProductListComponent,
+    WarehouseComponent
   ],
   imports: [
     BrowserModule,

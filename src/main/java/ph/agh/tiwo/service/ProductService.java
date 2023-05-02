@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ph.agh.tiwo.dto.ProductDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
+import ph.agh.tiwo.entity.Warehouse;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
 import ph.agh.tiwo.repository.ProductRepository;
 import ph.agh.tiwo.util.UrlMap;
@@ -112,4 +113,20 @@ public class ProductService {
         return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity())
                 .type(productDto.getType()).bought(false).url(UrlMap.getUrl(productDto.getName())).productList(productList).build();
     }
+
+    public void  updateProductAddWarehouse(String productName, Warehouse warehouse) throws NoSuchProductException {
+        Optional<Product> productOptional = this.productRepository.findByName(productName);
+        if (productOptional.isEmpty()) {
+            throw new NoSuchProductException();
+        }
+        Product product = productOptional.get();
+        product.setWarehouse(warehouse);
+        this.productRepository.save(product);
+    }
+
+    public Product buildProductToWarehouse(ProductDto productDto, Warehouse warehouse){
+        return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity())
+                .type(productDto.getType()).bought(false).url(UrlMap.getUrl(productDto.getName())).warehouse(warehouse).build();
+    }
+
 }

@@ -54,4 +54,16 @@ public class GlobalExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
         return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+    @ExceptionHandler(value = {NoSuchWarehouseException.class})
+    public ResponseEntity<Object> handleNoSuchWarehouseException() {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {WarehouseAlreadyExistsException.class})
+    public ResponseEntity<Object> handleWarehouseAlreadyExistsException() {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), INVALID_REQUEST);
+        return new ResponseEntity<>(exceptionResponse, new HttpHeaders(), HttpStatus.CONFLICT);
+    }
 }

@@ -41,4 +41,8 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JsonIgnore
     private ProductList productList;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private Warehouse warehouse;
 }

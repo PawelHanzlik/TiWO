@@ -1,0 +1,17 @@
+<h1 id="warehouse">Warehouse</h1>
+<div>
+  <table>
+    <tr>
+      <td>Nazwa produktu</td>
+      <td>Gramatura</td>
+      <td>Rodzaj gramatury</td>
+      <td>Zdjecie</td>
+    </tr>
+    <tr *ngFor="let product of products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
+      <td>{{product.name}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.type}}</td>
+      <td><img src="{{product.url}}" alt=""/></td>
+    </tr>
+  </table>
+</div>

@@ -92,6 +92,10 @@ export class AppService {
   public addMoney<T>(userEmail : string, money : bigint) : Observable<T>{
     return this.http.put<T>(`${this.apiServerUrl}/tiwo/user/addMoney?email=${userEmail}&money=${money}`,{})
   }
+
+  public displayProducts(name : string | null) : Observable<any>{
+    return this.http.get(`${this.apiServerUrl}/tiwo/warehouse/getProducts?name=${name}`)
+  }
 }
 interface user{
   name: String;

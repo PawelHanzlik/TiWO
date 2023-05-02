@@ -5,23 +5,29 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ph.agh.tiwo.dto.ProductDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.entity.User;
+import ph.agh.tiwo.entity.Warehouse;
 import ph.agh.tiwo.repository.UserRepository;
 import ph.agh.tiwo.service.ProductListService;
 import ph.agh.tiwo.service.ProductService;
 import ph.agh.tiwo.service.UserService;
+import ph.agh.tiwo.service.WarehouseService;
 import ph.agh.tiwo.util.UrlMap;
 
 import java.time.LocalDate;
+import java.util.Collections;
 
 @SpringBootApplication
 public class TiwoApplication {
 	private final UserRepository userRepository;
+	private final ProductService productService;
 
-	public TiwoApplication(UserRepository userRepository) {
+	public TiwoApplication(UserRepository userRepository, ProductService productService) {
 		this.userRepository = userRepository;
+		this.productService = productService;
 	}
 
 	public static void main(String[] args) {
@@ -29,7 +35,8 @@ public class TiwoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner run(ProductService productService, ProductListService productListService, UserService userService){
+	public CommandLineRunner run(ProductService productService, ProductListService productListService, UserService userService,
+								 WarehouseService warehouseService){
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return args -> {
 			productService.addProduct(Product.builder().name("chleb").cost(5.0).bought(false)
@@ -50,6 +57,8 @@ public class TiwoApplication {
 
 			productService.addProduct(Product.builder().name("ciastka").cost(10.0).bought(false)
 					.quantity(1.0).type("sztuk").url(UrlMap.getUrl("ciastka")).build());
+			productService.addProduct(Product.builder().name("chleb").cost(5.0).bought(false)
+					.quantity(2.0).type("sztuk").url(UrlMap.getUrl("chleb")).build());
 
 			ProductList druga =
 					productListService.addProductList(ProductList.builder().name("drugaLista").description("druga testowa")
@@ -63,6 +72,37 @@ public class TiwoApplication {
 
 			productListService.updateProductListAddUser("pierwszaLista", user);
 			productListService.updateProductListAddUser("drugaLista", user);
+
+
+			productService.addProduct(Product.builder().name("drukarka").cost(350.0).bought(false)
+					.quantity(50.0).type("sztuk").url(UrlMap.getUrl("drukarka")).build());
+			productService.addProduct(Product.builder().name("wiertarka").cost(250.0).bought(false)
+					.quantity(30.0).type("sztuk").url(UrlMap.getUrl("wiertarka")).build());
+			Warehouse warehouse =
+					warehouseService.addWarehouse(Warehouse.builder().name("testWarehouse").products(Collections.emptyList()).build());
+			productService.updateProductAddWarehouse("drukarka", warehouse);
+			productService.updateProductAddWarehouse("wiertarka", warehouse);
+			Product product = productService.buildProductToWarehouse(ProductDto.builder().name("chleb").quantity(200.0).type("sztuk").url("chleb").build(),
+					warehouse);
+			this.productService.addProduct(product);
+			product = productService.buildProductToWarehouse(ProductDto.builder().name("mleko").quantity(1000.0).type("sztuk").url("mleko").build(),
+					warehouse);
+			this.productService.addProduct(product);
+			product = productService.buildProductToWarehouse(ProductDto.builder().name("cukier").quantity(800.0).type("kg").url("chleb").build(),
+					warehouse);
+			this.productService.addProduct(product);
+			product = productService.buildProductToWarehouse(ProductDto.builder().name("ciastka").quantity(600.0).type("sztuk").url("ciastka").build(),
+					warehouse);
+			this.productService.addProduct(product);
+			product = productService.buildProductToWarehouse(ProductDto.builder().name("szynka").quantity(200.0).type("kg").url("szynka").build(),
+					warehouse);
+			this.productService.addProduct(product);
+			product = productService.buildProductToWarehouse(ProductDto.builder().name("ser").quantity(400.0).type("kg").url("ser").build(),
+					warehouse);
+			this.productService.addProduct(product);
+			product = productService.buildProductToWarehouse(ProductDto.builder().name("maslo").quantity(400.0).type("sztuk").url("maslo").build(),
+					warehouse);
+			this.productService.addProduct(product);
 		};
 	}
 }
