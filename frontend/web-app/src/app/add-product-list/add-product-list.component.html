@@ -5,8 +5,7 @@
   <label class="centered" id="DescriptionTitle" for="Description">Description</label>
   <label class="centered" id="DueToTitle" for="DueTo">Due to</label>
   <input class="centered" type="text" [defaultValue]="" id="Description" name="Description" (change)="assignDescription($event.target)">
-  <input class="centered" type="date" [min]="today" [defaultValue]="" id="DueTo" name="DueTo" (change)="assignDueTo($event.target)">
-
+  <input class="centered" type="date" [min]="today" [defaultValue]="today" id="DueTo" name="DueTo" (change)="assignDueTo($event.target)">
   <label class="centered" id="error" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
   <button id="button" class="button">
     <a (click)="addProductListToUser()">Dodaj nowa liste produktow</a>

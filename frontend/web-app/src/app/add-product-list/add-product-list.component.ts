@@ -16,7 +16,7 @@ export class AddProductListComponent implements OnInit {
   addOk: boolean
   today : string
   constructor(private appService: AppService, private router: Router) {
-    this.today = new Date().getFullYear() + '-' + new Date().getMonth()+1 + '-' + new Date().getDate()
+    this.today = this.getDate()
     this.name = {
       value: ""
     }
@@ -73,6 +73,19 @@ export class AddProductListComponent implements OnInit {
         }
       );
     }
+  }
+
+  getDate(){
+    let d = new Date(),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+    return year + '-' + month + '-' + day
   }
 }
 interface productListData{

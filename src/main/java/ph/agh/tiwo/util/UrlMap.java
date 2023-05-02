@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class UrlMap {
 
-    private static Map<String, String> map;
+    private static final Map<String, String> map;
 
     // Instantiating the static map
     static
@@ -24,5 +24,5 @@ public class UrlMap {
 
     public static String getUrl(String productName){
         return map.get(productName);
-    }
+    } // getOrDefault
 }
