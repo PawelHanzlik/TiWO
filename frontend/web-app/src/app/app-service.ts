@@ -40,6 +40,10 @@ export class AppService {
     return this.http.get(`${this.apiServerUrl}/tiwo/user/getLists?email=${userEmail}`)
   }
 
+  public displayUser(userEmail : string | null) : Observable<any>{
+    return this.http.get(`${this.apiServerUrl}/tiwo/user/getUser?email=${userEmail}`)
+  }
+
   public addProductToList(product : Product , listName : string | null) : Observable<any>{
     return this.http.post<Map<string, string>>(`${this.apiServerUrl}/tiwo/product/addProduct?listName=${listName}`,{
       "name" : product.name,
@@ -83,6 +87,10 @@ export class AppService {
 
   public cross<T>(productId : bigint) : Observable<T>{
     return this.http.put<T>(`${this.apiServerUrl}/tiwo/product/updateProductBought?productId=${productId}`,{})
+  }
+
+  public addMoney<T>(userEmail : string, money : bigint) : Observable<T>{
+    return this.http.put<T>(`${this.apiServerUrl}/tiwo/user/addMoney?email=${userEmail}&money=${money}`,{})
   }
 }
 interface user{

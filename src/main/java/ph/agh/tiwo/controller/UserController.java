@@ -10,6 +10,7 @@ import ph.agh.tiwo.dto.UserDto;
 import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.entity.User;
+import ph.agh.tiwo.exception.Classes.NegativeMoneyException;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
 import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
 import ph.agh.tiwo.repository.UserRepository;
@@ -18,7 +19,6 @@ import ph.agh.tiwo.service.UserService;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -78,4 +78,27 @@ public class UserController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @GetMapping("/getMoney")
+    public ResponseEntity<Double> getUserMoney(@RequestParam String email){
+        User user = userService.getUserByEmail(email);
+        return new ResponseEntity<>(user.getMoney(), HttpStatus.OK);
+    }
+
+    @PutMapping("/addMoney")
+    public ResponseEntity<Double> addUserMoney(@RequestParam String email, @RequestParam Double money){
+        User user = userService.getUserByEmail(email);
+        if (money > 0) {
+            user.setMoney(user.getMoney() + money);
+            userRepository.save(user);
+        } else {
+            throw new NegativeMoneyException();
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUser(@RequestParam String email){
+        User user = userService.getUserByEmail(email);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }

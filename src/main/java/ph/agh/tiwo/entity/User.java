@@ -32,6 +32,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "money", nullable = false)
+    private Double money;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<ProductList> productLists;
 

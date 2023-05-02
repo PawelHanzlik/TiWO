@@ -1,3 +1,6 @@
+<p id="name_surname">{{user.name}}  {{user.surname}} </p>
+<p id="money">Stan konta: {{user.money}}</p>
+<button id="add" (click)="addMoney()">Doladuj</button>
 <button id="wyloguj" (click)="logout()">Wyloguj</button>
 <div id = "lista" *ngFor="let row of lists">
   <p>Nazwa : {{row.name}} , Zrealizowac do : {{row.dueTo}}

@@ -59,6 +59,7 @@ public class UserService {
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
         user.setEmail(userDto.getEmail());
+        user.setMoney(user.getMoney());
         user.setProductLists(userDto.getProductLists());
         return this.userRepository.save(user);
     }
@@ -72,6 +73,7 @@ public class UserService {
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
         user.setEmail(userDto.getEmail());
+        user.setMoney(user.getMoney());
         user.setProductLists(userDto.getProductLists());
         return this.userRepository.save(user);
     }
@@ -92,6 +94,7 @@ public class UserService {
                 .surname(userDto.getSurname())
                 .email(userDto.getEmail())
                 .password(password)
+                .money(userDto.getMoney())
                 .productLists(Collections.emptySet()).build();
     }
 }

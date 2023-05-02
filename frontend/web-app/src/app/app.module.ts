@@ -16,7 +16,6 @@ import {RegisterResultComponent} from './register-result/register-result.compone
 import {AuthInterceptor} from "./AuthInterceptor";
 import {AddProductComponent} from './add-product/add-product.component';
 import {AddProductListComponent} from './add-product-list/add-product-list.component';
-
 @NgModule({
   declarations: [
     AppComponent,

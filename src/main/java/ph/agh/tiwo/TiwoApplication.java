@@ -59,7 +59,7 @@ public class TiwoApplication {
 			productService.updateProductAddProductList("ciastka", druga);
 
 			User user = userService.addUser(User.builder().name("testName").surname("testSurname").email("testEmail")
-					.password(passwordEncoder.encode("testPassword")).build());
+					.password(passwordEncoder.encode("testPassword")).money(100.0).build());
 
 			productListService.updateProductListAddUser("pierwszaLista", user);
 			productListService.updateProductListAddUser("drugaLista", user);

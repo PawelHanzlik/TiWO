@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductList} from "../dto/ProductList";
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
+import {User} from "../dto/User";
 
 @Component({
   selector: 'app-user-page',
@@ -11,13 +12,26 @@ import {Router} from "@angular/router";
 export class UserPageComponent implements OnInit {
 
   lists : Array<ProductList> = []
-  deleteOk : boolean;
+  deleteOk : boolean
+  user : User
+  money : bigint
   constructor(private appService: AppService, private router: Router) {
     this.deleteOk = false
+    this.user = {
+      id : BigInt(0),
+      name : "",
+      surname : "",
+      email : "",
+      password : "",
+      money : BigInt(0),
+      productLists : new Set()
+    }
+    this.money = BigInt(0)
   }
 
   ngOnInit(): void {
     this.displayLists()
+    this.displayUser()
   }
 
   displayLists(){
@@ -28,12 +42,20 @@ export class UserPageComponent implements OnInit {
     )
   }
 
+  displayUser(){
+    this.appService.displayUser(localStorage.getItem("email")).subscribe(
+      (response) => {
+        this.user = response
+      }
+    )
+  }
+
   async cross(productId : bigint){
     await this.appService.cross(productId).toPromise()
     this.displayLists()
+    this.displayUser()
   }
   logout(){
-    console.log("grrgg")
     localStorage.setItem("token", "")
     console.log(localStorage.getItem("token"))
     this.router.navigate(['/login'])
@@ -63,10 +85,18 @@ export class UserPageComponent implements OnInit {
   async deleteList(listId : bigint){
     await this.appService.deleteList(listId).toPromise()
     this.displayLists()
+    this.displayUser()
   }
 
   async deleteProduct(productId : bigint){
     await this.appService.deleteProduct(productId).toPromise()
     this.displayLists()
+    this.displayUser()
+  }
+
+  async addMoney(){
+    await this.appService.addMoney(this.user.email, BigInt(50)).toPromise()
+    this.displayLists()
+    this.displayUser()
   }
 }

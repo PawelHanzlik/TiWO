@@ -13,6 +13,7 @@ public enum ExceptionMessages {
     USER_ALREADY_EXISTS("User already exists"),
 
     PRODUCT_ALREADY_EXISTS("Product already exists"),
+    NEGATIVE_MONEY("Incorrect money amount"),
     PRODUCT_LIST_ALREADY_EXISTS("Product list already exists");
     @Getter
     private final String errorMessage;

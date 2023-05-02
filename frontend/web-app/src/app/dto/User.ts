@@ -6,5 +6,6 @@ export interface User {
   surname : string
   email : string
   password : string
+  money : bigint
   productLists : Set<ProductList>
 }

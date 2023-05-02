@@ -17,5 +17,6 @@ public class UserDto {
     private String name;
     private String surname;
     private String email;
+    private Double money;
     private Set<ProductList> productLists;
 }
