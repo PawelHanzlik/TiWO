@@ -158,7 +158,7 @@ public class ProductServiceUnitTests {
     @Test
     void buildProductOk(){
         Product product = this.productService.buildProduct(
-                new ProductDto("test",1.0,"test"),productList);
+                new ProductDto("test",1.0,"test", "test"),productList);
         assertEquals(product.getName(), "test");
         assertEquals(product.getQuantity(),1.0);
         assertEquals(product.getType(), "test");

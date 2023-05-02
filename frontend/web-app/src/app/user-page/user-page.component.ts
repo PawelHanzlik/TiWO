@@ -57,7 +57,6 @@ export class UserPageComponent implements OnInit {
   }
   logout(){
     localStorage.setItem("token", "")
-    console.log(localStorage.getItem("token"))
     this.router.navigate(['/login'])
   }
 
@@ -100,8 +99,8 @@ export class UserPageComponent implements OnInit {
     this.displayUser()
   }
 
-  async buyProduct(productName : string, productQuantity : number){
-    await this.appService.buyProduct(productName, productQuantity).toPromise()
+  async buyProduct(productId : bigint,productName : string, productQuantity : number){
+    await this.appService.buyProduct(productId, productName, productQuantity, localStorage.getItem("email")).toPromise()
     this.displayLists()
     this.displayUser()
   }

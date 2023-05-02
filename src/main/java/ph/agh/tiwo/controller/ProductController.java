@@ -69,8 +69,10 @@ public class ProductController {
     }
 
     @PutMapping("/buyProduct")
-    public ResponseEntity<Void> buyProduct(@RequestParam String productName, Double productQuantity){
-        this.warehouseService.buyProduct(productName, productQuantity);
+    public ResponseEntity<Void> buyProduct(@RequestParam String productId){
+        Product product = this.productService.getProductById(Long.valueOf(productId));
+        product.setBought(true);
+        this.productRepository.save(product);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

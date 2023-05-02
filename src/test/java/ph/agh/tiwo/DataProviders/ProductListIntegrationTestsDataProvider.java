@@ -45,7 +45,7 @@ public class ProductListIntegrationTestsDataProvider {
 
         productInt = Product.builder().id(100L).name("testInt_1").cost(5.0).build();
         productInt1 = Product.builder().id(200L).name("testInt_2").cost(10.0).build();
-        productDto = new ProductDto("test", 2.3,"test");
+        productDto = new ProductDto("test", 2.3,"test", "test");
         productDto1 = ProductDto.builder().name("name").quantity(1.0).type("test").build();
         productInt2 = Product.builder().name("test").quantity(2.3).type("test").productList(productList).build();
         productListDto = new ProductListDto("name", Collections.emptyList(),"test", LocalDate.now());

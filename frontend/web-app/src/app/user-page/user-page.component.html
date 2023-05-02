@@ -21,7 +21,7 @@
       <td><img src="{{product.url}}" alt=""/></td>
       <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmien</button>
       <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usun</button>
-      <button id="buttonBuyProduct" (click) = "buyProduct(product.name, product.quantity)">Kup</button>
+      <button id="buttonBuyProduct" (click) = "buyProduct(product.id, product.name, product.quantity)">Kup</button>
     </tr>
     <p>Opis : {{row.description}}</p>
     <button id="buttonAddProduct" (click) = "addListName(row.name)">Dodaj produkt</button>

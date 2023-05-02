@@ -101,4 +101,10 @@ public class UserController {
         User user = userService.getUserByEmail(email);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    @PutMapping("/buyProduct")
+    public ResponseEntity<Void> buyProduct(@RequestParam String email, @RequestParam String productName){
+        userService.buyProduct(email, productName);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

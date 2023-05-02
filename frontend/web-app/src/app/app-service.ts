@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
-import {mapTo, Observable, tap} from "rxjs";
+import {forkJoin, mapTo, Observable, tap} from "rxjs";
 import {Token} from "./dto/Token";
 
 @Injectable({
@@ -97,8 +97,10 @@ export class AppService {
     return this.http.get(`${this.apiServerUrl}/tiwo/warehouse/getProducts?name=${name}`)
   }
 
-  public buyProduct<T>(productName : string, productQuantity : number) : Observable<any>{
-    return this.http.put<T>(`${this.apiServerUrl}/tiwo/product/buyProduct?productName=${productName}&productQuantity=${productQuantity}`,{})
+  public buyProduct<T>(productId : bigint, productName : string, productQuantity : number, userEmail : string | null) : Observable<any>{
+    return forkJoin([this.http.put<T>(`${this.apiServerUrl}/tiwo/warehouse/buyProduct?productName=${productName}&productQuantity=${productQuantity}`,{}),
+      this.http.put<T>(`${this.apiServerUrl}/tiwo/user/buyProduct?email=${userEmail}&productName=${productName}`,{}),
+      this.http.put<T>(`${this.apiServerUrl}/tiwo/product/buyProduct?productId=${productId}`,{})])
   }
 }
 interface user{

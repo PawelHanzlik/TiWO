@@ -54,7 +54,7 @@ public class UserServiceDataProvider {
         users.add(user1);
 
         user3 = User.builder().id(userId).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productLists).build();
-        userDto = new UserDto("test_name_1","test_surname","test_email_1",productLists1);
+        userDto = new UserDto("test_name_1","test_surname","test_email_1",100.0, productLists1);
         userDto.setSurname("test_surname_1");
         userDto1 = new UserDto();
         userDto1.setEmail("email");
@@ -62,8 +62,8 @@ public class UserServiceDataProvider {
         userDto1.setName("name");
         userDto.setProductLists(productLists);
 
-        userInt = User.builder().id(2L).name("test_name").surname("test_surname").email("test_email").password("test_pass").productLists(productListsInt).build();
-        userInt1 = User.builder().id(3L).name("new_name").surname("new_surname").email("new_email").password("new_pass").productLists(productListsInt).build();
+        userInt = User.builder().id(2L).name("test_name").surname("test_surname").email("test_email").password("test_pass").money(100.0).productLists(productListsInt).build();
+        userInt1 = User.builder().id(3L).name("new_name").surname("new_surname").email("new_email").password("new_pass").money(100.0).productLists(productListsInt).build();
         productListInt = ProductList.builder().id(2L).name("test_1").description("test").build();
         productListsInt = new HashSet<>();
         productListsInt.add(productListInt);

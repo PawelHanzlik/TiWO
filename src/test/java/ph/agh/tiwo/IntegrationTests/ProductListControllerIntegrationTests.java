@@ -60,7 +60,7 @@ public class ProductListControllerIntegrationTests {
 
     @Test
     public void addProductListOkTest_UserLogged() throws Exception {
-        this.userRepository.save(User.builder().email("test").surname("test").password("test").name("test").build());
+        this.userRepository.save(User.builder().email("test").surname("test").password("test").name("test").money(100.0).build());
         mockMvc.perform(post("/tiwo/productList/addProductList?userEmail="+"test")
                         .accept("*/*")
                         .param("action", "signup")

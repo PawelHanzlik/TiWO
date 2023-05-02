@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ph.agh.tiwo.dto.UserDto;
 import ph.agh.tiwo.entity.User;
+import ph.agh.tiwo.exception.Classes.NegativeMoneyException;
 import ph.agh.tiwo.exception.Classes.NoSuchUserException;
 import ph.agh.tiwo.exception.Classes.UserAlreadyExistsException;
 import ph.agh.tiwo.repository.UserRepository;
+import ph.agh.tiwo.util.ProductMap;
 
 import java.util.Collections;
 import java.util.List;
@@ -96,5 +98,19 @@ public class UserService {
                 .password(password)
                 .money(userDto.getMoney())
                 .productLists(Collections.emptySet()).build();
+    }
+
+    public User buyProduct(String userEmail, String productName) throws NoSuchUserException{
+        Optional<User> userOptional = this.userRepository.findByEmail(userEmail);
+        if (userOptional.isEmpty()){
+            throw new NoSuchUserException();
+        }
+        User user =  userOptional.get();
+        if (user.getMoney() - ProductMap.getCost(productName) > 0) {
+            user.setMoney(user.getMoney() - ProductMap.getCost(productName));
+        } else {
+            throw new NegativeMoneyException();
+        }
+        return this.userRepository.save(user);
     }
 }

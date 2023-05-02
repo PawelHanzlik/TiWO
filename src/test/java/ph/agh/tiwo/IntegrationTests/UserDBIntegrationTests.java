@@ -57,7 +57,7 @@ public class UserDBIntegrationTests {
     }
     @Test
     public void addUserThenGetUserOkTest(){
-        User userIntNew = User.builder().email("email").password("pass").name("name").surname("surname").build();
+        User userIntNew = User.builder().email("email").password("pass").name("name").surname("surname").money(100.0).build();
         this.userService.addUser(userIntNew);
         User user = this.userService.getUserByEmail("email");
         assertNotNull(user);

@@ -9,7 +9,7 @@ import ph.agh.tiwo.entity.ProductList;
 import ph.agh.tiwo.entity.Warehouse;
 import ph.agh.tiwo.exception.Classes.NoSuchProductException;
 import ph.agh.tiwo.repository.ProductRepository;
-import ph.agh.tiwo.util.UrlMap;
+import ph.agh.tiwo.util.ProductMap;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,11 +55,11 @@ public class ProductService {
         }
         Product product = productOptional.get();
         product.setName(productToUpdate.getName());
-        product.setCost(productToUpdate.getCost());
-        product.setBought(productToUpdate.getBought());
+        product.setCost(ProductMap.getCost(productToUpdate.getName()));
+        product.setBought(false);
         product.setQuantity(productToUpdate.getQuantity());
         product.setType(productToUpdate.getType());
-        product.setUrl(productToUpdate.getUrl());
+        product.setUrl(ProductMap.getUrl(productToUpdate.getName()));
         return this.productRepository.save(product);
     }
 
@@ -70,11 +70,11 @@ public class ProductService {
         }
         Product product = productOptional.get();
         product.setName(productToUpdate.getName());
-        product.setCost(productToUpdate.getCost());
-        product.setBought(productToUpdate.getBought());
+        product.setCost(ProductMap.getCost(productToUpdate.getName()));
+        product.setBought(false);
         product.setQuantity(productToUpdate.getQuantity());
         product.setType(productToUpdate.getType());
-        product.setUrl(productToUpdate.getUrl());
+        product.setUrl(ProductMap.getUrl(productToUpdate.getName()));
         return this.productRepository.save(product);
     }
 
@@ -110,8 +110,8 @@ public class ProductService {
     }
 
     public Product buildProduct(ProductDto productDto, ProductList productList){
-        return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity())
-                .type(productDto.getType()).bought(false).url(UrlMap.getUrl(productDto.getName())).productList(productList).build();
+        return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity()).cost(ProductMap.getCost(productDto.getName()))
+                .type(productDto.getType()).bought(false).url(ProductMap.getUrl(productDto.getName())).productList(productList).build();
     }
 
     public void  updateProductAddWarehouse(String productName, Warehouse warehouse) throws NoSuchProductException {
@@ -125,8 +125,8 @@ public class ProductService {
     }
 
     public Product buildProductToWarehouse(ProductDto productDto, Warehouse warehouse){
-        return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity())
-                .type(productDto.getType()).bought(false).url(UrlMap.getUrl(productDto.getName())).warehouse(warehouse).build();
+        return Product.builder().name(productDto.getName()).quantity(productDto.getQuantity()).cost(ProductMap.getCost(productDto.getName()))
+                .type(productDto.getType()).bought(false).url(ProductMap.getUrl(productDto.getName())).warehouse(warehouse).build();
     }
 
 }

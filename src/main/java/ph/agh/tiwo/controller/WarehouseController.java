@@ -31,4 +31,9 @@ public class WarehouseController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @PutMapping("/buyProduct")
+    public ResponseEntity<Void> buyProduct(@RequestParam String productName, @RequestParam Double productQuantity){
+        this.warehouseService.buyProduct(productName, productQuantity);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

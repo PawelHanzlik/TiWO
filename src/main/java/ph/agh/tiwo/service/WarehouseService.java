@@ -3,7 +3,6 @@ package ph.agh.tiwo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ph.agh.tiwo.entity.Product;
 import ph.agh.tiwo.entity.Warehouse;
 import ph.agh.tiwo.exception.Classes.*;
 import ph.agh.tiwo.repository.WarehouseRepository;
@@ -43,7 +42,6 @@ public class WarehouseService {
             Warehouse warehouse = warehouseOptional.get();
             for (int i = 0; i < warehouse.getProducts().size(); i++){
                 if (warehouse.getProducts().get(i).getName().equals(productName)){
-                    double quantity = warehouse.getProducts().get(i).getQuantity();
                     if (warehouse.getProducts().get(i).getQuantity() - productQuantity > 0){
                         warehouse.getProducts().get(i).setQuantity(warehouse.getProducts().get(i).getQuantity() - productQuantity);
                     }

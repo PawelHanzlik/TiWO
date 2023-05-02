@@ -15,7 +15,7 @@ import ph.agh.tiwo.service.ProductListService;
 import ph.agh.tiwo.service.ProductService;
 import ph.agh.tiwo.service.UserService;
 import ph.agh.tiwo.service.WarehouseService;
-import ph.agh.tiwo.util.UrlMap;
+import ph.agh.tiwo.util.ProductMap;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -39,11 +39,11 @@ public class TiwoApplication {
 								 WarehouseService warehouseService){
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return args -> {
-			productService.addProduct(Product.builder().name("chleb").cost(5.0).bought(false)
-					.quantity(2.0).type("sztuk").url(UrlMap.getUrl("chleb")).build());
+			productService.addProduct(Product.builder().name("chleb").cost(ProductMap.getCost("chleb")).bought(false)
+					.quantity(2.0).type("sztuk").url(ProductMap.getUrl("chleb")).build());
 
-			productService.addProduct(Product.builder().name("mleko").cost(3.0).bought(false)
-					.quantity(3.0).type("sztuk").url(UrlMap.getUrl("mleko")).build());
+			productService.addProduct(Product.builder().name("mleko").cost(ProductMap.getCost("mleko")).bought(false)
+					.quantity(3.0).type("sztuk").url(ProductMap.getUrl("mleko")).build());
 
 			ProductList pierwsza = productListService.addProductList(ProductList.builder().name("pierwszaLista")
 					.description("pierwsza testowa").dueTo(LocalDate.now().plusDays(2)).build());
@@ -52,13 +52,11 @@ public class TiwoApplication {
 
 			productService.updateProductAddProductList("mleko", pierwsza);
 
-			productService.addProduct(Product.builder().name("maslo").cost(7.0).bought(false)
-					.quantity(1.0).type("kostka").url(UrlMap.getUrl("maslo")).build());
+			productService.addProduct(Product.builder().name("maslo").cost(ProductMap.getCost("maslo")).bought(false)
+					.quantity(1.0).type("kostka").url(ProductMap.getUrl("maslo")).build());
 
-			productService.addProduct(Product.builder().name("ciastka").cost(10.0).bought(false)
-					.quantity(1.0).type("sztuk").url(UrlMap.getUrl("ciastka")).build());
-			productService.addProduct(Product.builder().name("chleb").cost(5.0).bought(false)
-					.quantity(2.0).type("sztuk").url(UrlMap.getUrl("chleb")).build());
+			productService.addProduct(Product.builder().name("ciastka").cost(ProductMap.getCost("ciastka")).bought(false)
+					.quantity(1.0).type("sztuk").url(ProductMap.getUrl("ciastka")).build());
 
 			ProductList druga =
 					productListService.addProductList(ProductList.builder().name("drugaLista").description("druga testowa")
@@ -74,10 +72,10 @@ public class TiwoApplication {
 			productListService.updateProductListAddUser("drugaLista", user);
 
 
-			productService.addProduct(Product.builder().name("drukarka").cost(350.0).bought(false)
-					.quantity(50.0).type("sztuk").url(UrlMap.getUrl("drukarka")).build());
-			productService.addProduct(Product.builder().name("wiertarka").cost(250.0).bought(false)
-					.quantity(30.0).type("sztuk").url(UrlMap.getUrl("wiertarka")).build());
+			productService.addProduct(Product.builder().name("drukarka").cost(ProductMap.getCost("drukarka")).bought(false)
+					.quantity(50.0).type("sztuk").url(ProductMap.getUrl("drukarka")).build());
+			productService.addProduct(Product.builder().name("wiertarka").cost(ProductMap.getCost("wiertarka")).bought(false)
+					.quantity(30.0).type("sztuk").url(ProductMap.getUrl("wiertarka")).build());
 			Warehouse warehouse =
 					warehouseService.addWarehouse(Warehouse.builder().name("testWarehouse").products(Collections.emptyList()).build());
 			productService.updateProductAddWarehouse("drukarka", warehouse);

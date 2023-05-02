@@ -28,8 +28,8 @@ public class UserIntegrationTestsDataProvider {
         loginDto = new LoginDto("testEmail1", passwordEncrypted1);
         loginDto1 = new LoginDto("testEmail", "testPassword");
         loginDto2 = new LoginDto("testEmail", "wrongPassword");
-        userDto = new UserDto("testName", "testSurname","testEmail1", Collections.emptySet());
-        userDto1 = new UserDto("testName", "testSurname","testEmail", Collections.emptySet());
+        userDto = new UserDto("testName", "testSurname","testEmail1",100.0, Collections.emptySet());
+        userDto1 = new UserDto("testName", "testSurname","testEmail",100.0, Collections.emptySet());
         password = "testPassword1";
         password1 = "testPassword";
         user = User.builder().name("testName").surname("testSurname").email("testEmail1")
