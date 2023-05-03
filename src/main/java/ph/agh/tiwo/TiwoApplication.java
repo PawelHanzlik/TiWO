@@ -53,7 +53,7 @@ public class TiwoApplication {
 			productService.updateProductAddProductList("mleko", pierwsza);
 
 			productService.addProduct(Product.builder().name("maslo").cost(ProductMap.getCost("maslo")).bought(false)
-					.quantity(1.0).type("kostka").url(ProductMap.getUrl("maslo")).build());
+					.quantity(1.0).type("sztuk").url(ProductMap.getUrl("maslo")).build());
 
 			productService.addProduct(Product.builder().name("ciastka").cost(ProductMap.getCost("ciastka")).bought(false)
 					.quantity(1.0).type("sztuk").url(ProductMap.getUrl("ciastka")).build());

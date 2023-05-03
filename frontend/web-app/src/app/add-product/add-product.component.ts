@@ -14,52 +14,60 @@ export class AddProductComponent implements OnInit {
   type: productData;
   product : Product
   addOk: boolean
-
-  selectedName : string = ""
-  selectedType : string = ""
+  mapa : Map<string, string>
+  selectedName : string = "chleb"
+  selectedType : string = "sztuk"
   constructor(private appService: AppService, private router: Router) {
     this.name = {
-      value: ""
+      value: "chleb"
     }
-    this.quantity = 0
+    this.quantity = 1
 
     this.type = {
-      value: ""
+      value: "sztuk"
     }
 
     this.product = {
-      name: "",
-      quantity: 0,
-      type:"",
+      name: "chleb",
+      quantity: 1,
+      type:"sztuk",
       url:""
     }
 
     this.addOk = false
-  }
-
-  assignName(value: any) {
-    this.name.value = value.value;
-    this.product.name = value.value;
+    this.mapa = new Map([
+      ["drukarka" , "sztuk"],
+      ["wiertarka" , "sztuk"],
+      ["chleb" , "sztuk"],
+      ["maslo" , "sztuk"],
+      ["szynka" , "kg"],
+      ["ser" , "kg"],
+      ["ciastka" , "sztuk"],
+      ["cukier" , "kg"],
+      ["mleko" , "sztuk"],
+    ]);
   }
 
   assignNameSelect(value: any) {
     this.name.value = this.selectedName
     this.product.name = value.value;
+    this.assignTypeSelect(this.mapa.get(value.value))
   }
 
   assignQuantity(value: any) {
-    this.quantity = value.value;
-    this.product.quantity = value.value;
-  }
-
-  assignType(value: any) {
-    this.type.value = value.value;
-    this.product.type = value.value;
+    if (value.value >= 0) {
+      this.quantity = value.value;
+      this.product.quantity = value.value;
+    }else {
+      this.quantity = 1;
+      this.product.quantity = 1;
+    }
   }
 
   assignTypeSelect(value: any) {
+    this.selectedType = value
     this.type.value = this.selectedType;
-    this.product.type = value.value;
+    this.product.type = value;
   }
   ngOnInit(): void {
   }

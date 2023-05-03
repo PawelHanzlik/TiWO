@@ -1,11 +1,10 @@
 <div id="form">
   <label class="centered" id="AddTitle" >NOWY PRODUKT</label>
-  <label class="centered" id="NameTitle" for="Name">Name</label>
-  <input class="centered" type="text" [value]="selectedName" id="Name" name="Name" (change)="assignName($event.target)">
+  <label class="centered" id="NameTitle" for="NameSelect">Nazwa produktu</label>
   <select name="NameSelect" id="NameSelect" [(ngModel)] = "selectedName" (change)="assignNameSelect($event.target)">
     <option value="drukarka">drukarka</option>
     <option value="wiertarka">wiertarka</option>
-    <option value="chleb">chleb</option>
+    <option value="chleb" >chleb</option>
     <option value="maslo">maslo</option>
     <option value="szynka">szynka</option>
     <option value="ser">ser</option>
@@ -13,16 +12,10 @@
     <option value="cukier">cukier</option>
     <option value="mleko">mleko</option>
   </select>
-  <label class="centered" id="QuantityTitle" for="Quantity">Quantity</label>
-  <label class="centered" id="TypeTitle" for="Type">Type</label>
-  <input class="centered" type="text" [defaultValue]="" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
-  <input class="centered" type="text" [value]="selectedType" id="Type" name="Type" (change)="assignType($event.target)">
-  <select  name="NameSelect" id="TypeSelect" [(ngModel)] = "selectedType" (change)="assignTypeSelect($event.target)">
-    <option value="sztuk">sztuk</option>
-    <option value="kg">kg</option>
-    <option value="g">g</option>
-    <option value="deg">deg</option>
-  </select>
+  <label class="centered" id="QuantityTitle" for="Quantity">Ilość</label>
+  <label class="centered" id="TypeTitle" for="TypeSelect">Gramatura</label>
+  <input class="centered" type="number" [min]="1" [step]="1" [defaultValue]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
+  <input readonly name="TypeSelect" id="TypeSelect" [(ngModel)] = "selectedType">
   <label class="centered" id="error" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
   <button id="button" class="button">
     <a (click)="addProductToList()">Dodaj produkt</a>
