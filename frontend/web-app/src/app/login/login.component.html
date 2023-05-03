@@ -1,17 +1,17 @@
 <div id="form">
-  <label class="centered" id="LoginTitle" >LOGIN</label>
-  <label class="centered" id="EmailTitle" for="Email">Email</label>
-  <label class="centered" id="PasswordTitle" for="Password">Password</label>
-  <input class="centered" type="text" [defaultValue]="" id="Email" name="Email" (change)="assignLogin($event.target)">
-  <input class="centered" type="password" [defaultValue]="" id="Password" name="Password" (change)="assignPassword($event.target)" >
+  <label id="LoginTitle" >LOGIN</label>
+  <label  id="EmailTitle" for="Email">Email</label>
+  <label  id="PasswordTitle" for="Password">Hasło</label>
+  <input  type="text" [defaultValue]="" id="Email" name="Email" (change)="assignLogin($event.target)">
+  <input type="password" [defaultValue]="" id="Password" name="Password" (change)="assignPassword($event.target)" >
 
-  <label class="centered" id="Register">
-    <a id = "link" routerLink="/register">Register</a>
+  <label  id="Register">
+    <a id = "link" routerLink="/register">Rejestracja</a>
   </label>
 
-  <label class="centered" id="error" *ngIf="loginOk" style="color:#990000">Błąd logowania!!!</label>
-  <button id="button" class="button">
-    <a (click)="login()">SUBMIT</a>
+  <label id="error" *ngIf="loginOk" style="color:#990000">Błąd logowania!!!</label>
+  <button id="submitbutton">
+    <a (click)="login()">Zaloguj</a>
   </button>
 
 </div>

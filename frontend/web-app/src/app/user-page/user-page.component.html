@@ -1,31 +1,51 @@
-<p id="name_surname">{{user.name}}  {{user.surname}} </p>
-<p id="money">Stan konta: {{user.money}}</p>
-<button id="add" (click)="addMoney()">Doladuj</button>
-<button id="wyloguj" (click)="logout()">Wyloguj</button>
-<div id = "lista" *ngFor="let row of lists">
-  <p>Nazwa : {{row.name}} , Zrealizowac do : {{row.dueTo}}
-    <button id="buttonUpdateProductList" (click) = "addListId(row.id)">Zmien</button>
-    <button id="buttonDeleteProductList" (click) = "deleteList(row.id)">Usun</button>
-  </p>
-  <table>
-    <tr>
-      <td>Nazwa produktu</td>
-      <td>Gramatura</td>
-      <td>Rodzaj gramatury</td>
-      <td>Zdjecie</td>
-    </tr>
-    <tr *ngFor="let product of row.products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
-      <td (click) = "cross(product.id)">{{product.name}}</td>
-      <td>{{product.quantity}}</td>
-      <td>{{product.type}}</td>
-      <td><img src="{{product.url}}" alt=""/></td>
-      <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmien</button>
-      <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usun</button>
-      <button id="buttonBuyProduct" (click) = "buyProduct(product.id, product.name, product.quantity)">Kup</button>
-    </tr>
-    <p>Opis : {{row.description}}</p>
-    <button id="buttonAddProduct" (click) = "addListName(row.name)">Dodaj produkt</button>
-  </table>
+<div class="container">
+  <div id="profil">
+    <img id="ikonka" src="https://pwcbh.blob.core.windows.net/products/ikonka.png" alt="">
+    <p id="name_surname">{{user.name}}  {{user.surname}} </p>
+    <p id="money_icon">$ $ $</p>
+    <p id="money">Stan konta: {{user.money}}</p>
+    <div id = "wplacanie">
+      <input type="text"> &nbsp;
+      <button id="add" (click)="addMoney()">Doładuj</button>
+    </div>
+    <p id="money_icon2">$ $ $</p>
+    <button id="wyloguj" (click)="logout()">Wyloguj</button>
+  </div>
+  <div id="listy">
+    <div id = "lista" *ngFor="let row of lists">
+      <div>
+        <p id = "nazwa">Nazwa : {{row.name}}, Zrealizowac do : {{row.dueTo}} &nbsp;&nbsp;|
+          <button id="buttonUpdateProductList" (click) = "addListId(row.id)">Zmień listę</button> /
+          <button id="buttonDeleteProductList" (click) = "deleteList(row.id)">Usuń listę</button>
+        </p>
+      </div>
+      <table>
+        <!--
+        <tr>
+          <td>Nazwa produktu</td>
+          <td>Gramatura</td>
+          <td>Rodzaj gramatury</td>
+          <td>Zdjecie</td>
+        </tr>
+        -->
+        <tr *ngFor="let product of row.products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
+          <td id="kropka"><li></li></td>
+          <td (click) = "buyProduct(product.id, product.name, product.quantity)">{{product.name}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.type}}</td>
+          <td><img src="{{product.url}}" alt=""/></td>
+          <td>
+          <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmień produkt</button><br>
+          <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usuń produkt</button>
+          </td>
+          <!--<button id="buttonBuyProduct" (click) = "buyProduct(product.id, product.name, product.quantity)">Kup</button>-->
+        </tr>
+      </table>
+      <button id="buttonAddProduct" (click) = "addListName(row.name)">(+) Dodaj produkt</button>
+      <p id="opis">Opis : {{row.description}}</p>
+    </div>
+    <button id="buttonAddProductList" (click) = "addNewList()">(+) Dodaj nową listę</button>
+  </div>
+  <p></p>
 </div>
-<p></p>
-<button id="buttonAddProductList" (click) = "addNewList()">Dodaj nową listę</button>
+

@@ -1,58 +1,64 @@
-.centered {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 15pt;
+#form{
+  width: 40%;
+  height: 450px;
+  position: relative;
+  top: 100px;
+  left: 30%;
+  background: white;
+  padding: 0;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 #LoginTitle{
-  position: absolute;
-  top: 30%;
-  left: 48%;
-}
-#Email{
-  position: absolute;
-  top: 39%;
-  left: 45%;
-}
-#EmailTitle{
-  position: absolute;
-  top: 35%;
-  left: 38%;
-}
-#PasswordTitle{
-  position: absolute;
-  top: 45%;
-  left: 39%;
-}
-#Password{
-  position: absolute;
-  top: 49%;
-  left: 45%;
+  position: relative;
+  text-decoration: underline wavy red;
+  top: 10%;
+  left: 44%;
+  font-size: 1.6rem;
 }
 
-.button {
-  position: absolute;
-  top: 60%;
-  right: 40%;
-  font-size: 15pt;
+#EmailTitle{
+  position: relative;
+  top: 25%;
+  left: 35%;
+  font-size: 1.3rem;
+}
+
+#Email{
+  position: relative;
+  top: 30%;
+  left: 9%;
+  width: 30%;
+}
+
+#PasswordTitle{
+  position: relative;
+  top: 45%;
+  left: 28%;
+  font-size: 1.3rem;
+}
+
+#Password{
+  position: relative;
+  top: 50%;
+  right: 22%;
+  width: 30%;
 }
 
 #Register{
-  font-size: 10pt;
-  top: 53%;
-  left: 38%;
+  position: relative;
+  top: 59%;
+  right: 43%;
 }
 
-#Register ~ link{
-  color: blue;
-}
-
-#error{
-  font-size: 15pt;
-  top: 56%;
-  left: 45%;
+#submitbutton{
+  position: relative;
+  top: 65%;
+  left: 44%;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 1.3rem;
+  border: none;
+  background: white;
 }
 
 a:link {
