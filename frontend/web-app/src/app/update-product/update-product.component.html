@@ -1,5 +1,5 @@
 <div id="form">
-  <label id="AddTitle" >NOWY PRODUKT</label>
+  <label id="AddTitle" >ZMIEŃ PRODUKT</label>
   <label id="NameTitle" for="NameSelect">Nazwa produktu</label>
   <select id="NameSelect" [(ngModel)] = "selectedName" (change)="assignNameSelect($event.target)">
     <option value="drukarka">drukarka</option>
@@ -14,12 +14,12 @@
   </select>
   <label id="QuantityTitle" for="Quantity">Ilość</label>
   <label id="TypeTitle" for="TypeSelect">Gramatura</label>
-  <input type="number" [min]="1" [step]="1" [defaultValue]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
+  <input type="number" [min]="1" [step]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
   <input readonly name="TypeSelect" id="TypeSelect" [(ngModel)] = "selectedType">
-  <label id="errorAdd" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
+  <label id="errorAdd" *ngIf="addOk" style="color:#990000">Zmienianie nie powiodlo sie!!!</label>
   <label id="errorQuantity" *ngIf="quantityOk" style="color:#990000">Błędna ilość!!!</label>
   <button id="button">
-    <a (click)="addProductToList()">Dodaj produkt</a>
+    <a (click)="updateProductList()">Zmień produkt</a>
   </button>
 
 </div>

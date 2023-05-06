@@ -1,0 +1,14 @@
+<div id="form">
+  <label id="AddTitle" >ZMIEŃ LISTĘ PRODUKTOW</label>
+  <label id="NameTitle" for="Name">Nazwa</label>
+  <input type="text" id="Name" name="Name" [(ngModel)]="name.value" (change)="assignName($event.target)">
+  <label id="DescriptionTitle" for="Description">Opis</label>
+  <label id="DueToTitle" for="DueTo">Zrealizować do:</label>
+  <input type="text" id="Description" name="Description" [(ngModel)]="description.value" (change)="assignDescription($event.target)">
+  <input type="date" [min]="today" id="DueTo" name="DueTo" [(ngModel)]="dueTo" (change)="assignDueTo($event.target)">
+  <label id="error" *ngIf="addOk" style="color:#990000">Zmienianie nie powiodlo sie!!!</label>
+  <button id="button">
+    <a (click)="updateProductList()">Zmień liste produktow</a>
+  </button>
+
+</div>

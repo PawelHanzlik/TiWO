@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AppService} from "../app-service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-add-product-list',
-  templateUrl: './add-product-list.component.html',
-  styleUrls: ['./add-product-list.component.css']
+  selector: 'app-update-product-list',
+  templateUrl: './update-product-list.component.html',
+  styleUrls: ['./update-product-list.component.css']
 })
-export class AddProductListComponent implements OnInit {
-
+export class UpdateProductListComponent implements OnInit {
   name: productListData;
   dueTo: Date;
   description: productListData;
@@ -52,10 +51,11 @@ export class AddProductListComponent implements OnInit {
     this.productList.description = value.value;
   }
   ngOnInit(): void {
+    this.getProductList()
   }
 
-  addProductListToUser(){
-    this.appService.addProductListToUser(this.productList, localStorage.getItem("email")).subscribe(
+  updateProductList(){
+    this.appService.updateProductList(this.productList, localStorage.getItem("listId")).subscribe(
       () => {
         this.router.navigate(['/user-page'])
       },
@@ -77,6 +77,22 @@ export class AddProductListComponent implements OnInit {
       day = '0' + day;
     return year + '-' + month + '-' + day
   }
+
+  getProductList(){
+    console.log("dfsfdf")
+    this.appService.getProductList(localStorage.getItem("listId")).subscribe(
+      (response) => {
+        console.log(response.dueTo)
+        this.name.value = response.name;
+        this.productList.name = response.name;
+        // this.dueTo = response.dueTo;
+        // this.productList.dueTo = response.dueTo;
+        this.description.value = response.description;
+        this.productList.description = response.description;
+      }
+    );
+  }
+
 }
 interface productListData{
   value: string;

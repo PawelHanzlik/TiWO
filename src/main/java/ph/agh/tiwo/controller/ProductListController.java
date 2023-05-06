@@ -27,6 +27,10 @@ public class ProductListController {
         this.userRepository = userRepository;
     }
 
+    @GetMapping("/getProductList")
+    public ResponseEntity<ProductList> getProductList(@RequestParam String listId){
+        return new ResponseEntity<>(this.productListService.getProductListById(Long.valueOf(listId)), HttpStatus.OK);
+    }
     @PostMapping("/addProductList")
     public ResponseEntity<ProductList> addProductList(@RequestBody ProductListDto productListDto,
                                                   @RequestParam String userEmail){

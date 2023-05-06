@@ -30,6 +30,10 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
+    @GetMapping("/getProduct")
+    public ResponseEntity<Product> getProduct(@RequestParam String productId){
+        return new ResponseEntity<>(this.productService.getProductById(Long.valueOf(productId)), HttpStatus.OK);
+    }
     @PostMapping("/addProduct")
     public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto, @RequestParam String listName){
         Optional<ProductList> optionalProductList = this.productListRepository.findByName(listName);

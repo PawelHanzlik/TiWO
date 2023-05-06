@@ -57,7 +57,11 @@ export class UserPageComponent implements OnInit {
     this.displayUser()
   }
   assignMoney(value: any){
-    this.moneyToAdd = BigInt(value.value);
+    if (Number(value.value) >= 0) {
+      this.moneyToAdd = BigInt(value.value);
+    }else{
+      this.moneyToAdd = BigInt(0);
+    }
   }
 
   logout(){
@@ -74,12 +78,12 @@ export class UserPageComponent implements OnInit {
   updateProduct(productId : bigint){
     localStorage.setItem("productId", String(productId))
     localStorage.setItem("operation", "update")
-    this.router.navigate(['/add-product'])
+    this.router.navigate(['/update-product'])
   }
   addListId(listId : bigint){
     localStorage.setItem("listId", String(listId))
     localStorage.setItem("operation", "update")
-    this.router.navigate(['/add-product-list'])
+    this.router.navigate(['/update-product-list'])
   }
   addNewList(){
     localStorage.setItem("operation", "create")
@@ -111,4 +115,5 @@ export class UserPageComponent implements OnInit {
       this.displayUser()
     }
   }
+
 }

@@ -23,9 +23,13 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
-        User foundUser = userRepository.findByEmail(email)
-                .orElseThrow(NoSuchUserException::new);
-        if (!passwordEncoder.matches(password, foundUser.getPassword())) {
+        try {
+            User foundUser = userRepository.findByEmail(email)
+                    .orElseThrow(NoSuchUserException::new);
+            if (!passwordEncoder.matches(password, foundUser.getPassword())) {
+                throw new BadCredentialsException("Invalid password!");
+            }
+        }catch (Exception ex){
             throw new BadCredentialsException("Invalid password!");
         }
         return new UsernamePasswordAuthenticationToken(email, password, null);

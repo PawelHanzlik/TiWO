@@ -49,6 +49,9 @@ public class UserService {
         if (userOptional.isPresent()){
             throw new UserAlreadyExistsException();
         }
+        if (user.getMoney() == null){
+            user.setMoney(0.0);
+        }
         return this.userRepository.save(user);
     }
 

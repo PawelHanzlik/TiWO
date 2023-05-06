@@ -40,30 +40,42 @@ export class RegisterComponent implements OnInit {
 
   assignPassword(value: any) {
     this.password.value = value.value;
+    this.registerOk = false
   }
 
   assignEmail(value: any) {
     this.email.value = value.value;
     this.user.email = value.value;
+    this.registerOk = false
   }
 
   assignName(value: any) {
     this.name.value = value.value;
     this.user.name = value.value;
+    this.registerOk = false
   }
 
   assignSurname(value: any) {
     this.surname.value = value.value;
     this.user.surname = value.value;
+    this.registerOk = false
   }
   ngOnInit(): void {
   }
 
   public register(): void {
-    this.appService.register(this.user, this.password.value).subscribe(
-      () => { this.router.navigate(['/register-result'])},
-      () => {this.registerOk = true}
-    );
+    if (this.name.value != "" && this.surname.value != "" && this.email.value != "" && this.password.value != "") {
+      this.appService.register(this.user, this.password.value).subscribe(
+        () => {
+          this.router.navigate(['/login'])
+        },
+        () => {
+          this.registerOk = true
+        }
+      );
+    }else {
+      this.registerOk = true
+    }
   }
 }
 export interface registerData{

@@ -9,6 +9,7 @@
   <input  type="text" [defaultValue]="" id="Name" name="Name" (change)="assignName($event.target)">
   <input  type="text" [defaultValue]="" id="Surname" name="Surname" (change)="assignSurname($event.target)">
 
+  <label id="error" *ngIf="registerOk" style="color:#990000">Błąd rejestracji!!!</label>
   <button id="button" class="button">
     <a (click)="register()">Rejestruj</a>
   </button>

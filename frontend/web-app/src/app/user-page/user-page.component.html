@@ -5,7 +5,7 @@
     <p id="money_icon">$ $ $</p>
     <p id="money">Stan konta: {{user.money}}</p>
     <div id = "wplacanie">
-      <input type="text" [defaultValue]="0" (change)="assignMoney($event.target)"> &nbsp;
+      <input type="text" [defaultValue]="0" [(ngModel)] = "moneyToAdd" (change)="assignMoney($event.target)"> &nbsp;
       <button id="add" (click)="addMoney()">Doładuj</button>
     </div>
     <p id="money_icon2">$ $ $</p>
@@ -20,14 +20,6 @@
         </p>
       </div>
       <table>
-        <!--
-        <tr>
-          <td>Nazwa produktu</td>
-          <td>Gramatura</td>
-          <td>Rodzaj gramatury</td>
-          <td>Zdjecie</td>
-        </tr>
-        -->
         <tr *ngFor="let product of row.products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
           <td id="kropka"><li></li></td>
           <td (click) = "buyProduct(product.id, product.name, product.quantity, product.bought)">{{product.name}}</td>
@@ -38,7 +30,6 @@
           <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmień produkt</button><br>
           <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usuń produkt</button>
           </td>
-          <!--<button id="buttonBuyProduct" (click) = "buyProduct(product.id, product.name, product.quantity)">Kup</button>-->
         </tr>
       </table>
       <button id="buttonAddProduct" (click) = "addListName(row.name)">(+) Dodaj produkt</button>

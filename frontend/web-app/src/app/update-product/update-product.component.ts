@@ -3,11 +3,11 @@ import {AppService} from "../app-service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-update-product',
+  templateUrl: './update-product.component.html',
+  styleUrls: ['./update-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class UpdateProductComponent implements OnInit {
 
   name: productData;
   quantity: number;
@@ -84,11 +84,12 @@ export class AddProductComponent implements OnInit {
     this.product.type = value;
   }
   ngOnInit(): void {
+    this.getProduct()
   }
 
-  addProductToList() {
+  updateProductList() {
     this.quantityOk = false
-    this.appService.addProductToList(this.product, localStorage.getItem("listName")).subscribe(
+    this.appService.updateProduct(this.product, localStorage.getItem("productId")).subscribe(
       () => {
         this.router.navigate(['/user-page'])
       },
@@ -96,6 +97,21 @@ export class AddProductComponent implements OnInit {
         this.addOk = true
       }
     );
+  }
+
+  getProduct(){
+    this.appService.getProduct(localStorage.getItem("productId")).subscribe(
+      (response) => {
+        this.name.value = response.name
+        this.product.name = response.name;
+        this.selectedName = response.name
+        this.quantity = response.quantity;
+        this.product.quantity = response.quantity;
+        this.type.value = response.type;
+        this.product.type = response.type;
+        this.selectedType = response.type
+      }
+    )
   }
 }
 interface productData{

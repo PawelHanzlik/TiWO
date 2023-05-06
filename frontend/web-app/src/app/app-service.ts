@@ -36,8 +36,8 @@ export class AppService {
     })
   }
 
-  public displayLists(userEmail : string | null) : Observable<any>{
-    return this.http.get(`${this.apiServerUrl}/tiwo/user/getLists?email=${userEmail}`)
+  public displayLists(userEmail : string | null) : Observable<ProductList[]>{
+    return this.http.get<ProductList[]>(`${this.apiServerUrl}/tiwo/user/getLists?email=${userEmail}`)
   }
 
   public displayUser(userEmail : string | null) : Observable<any>{
@@ -50,6 +50,14 @@ export class AppService {
       "quantity" : product.quantity,
       "type" : product.type
     })
+  }
+
+  public getProduct(productId : string | null) : Observable<any>{
+    return this.http.get(`${this.apiServerUrl}/tiwo/product/getProduct?productId=${productId}`)
+  }
+
+  public getProductList(listId : string | null) : Observable<any>{
+    return this.http.get(`${this.apiServerUrl}/tiwo/productList/getProductList?listId=${listId}`)
   }
 
   public updateProduct(product : Product , productId : string | null) : Observable<any>{
@@ -115,6 +123,7 @@ interface Product{
   type : string
 }
 interface ProductList{
+  id : bigint
   name : string
   dueTo : Date
   description : string

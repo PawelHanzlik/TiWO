@@ -71,3 +71,9 @@
 .button:hover{
   text-decoration: underline black;
 }
+#error{
+  position: absolute;
+  top: 80%;
+  left: 42%;
+  font-size: 1rem;
+}

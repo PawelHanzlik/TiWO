@@ -87,7 +87,7 @@ public class UserController {
     @PutMapping("/addMoney")
     public ResponseEntity<Double> addUserMoney(@RequestParam String email, @RequestParam Double money){
         User user = userService.getUserByEmail(email);
-        if (money > 0) {
+        if (money >= 0) {
             user.setMoney(user.getMoney() + money);
             userRepository.save(user);
         } else {

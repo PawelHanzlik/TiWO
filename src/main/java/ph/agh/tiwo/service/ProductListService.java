@@ -28,6 +28,7 @@ public class ProductListService {
         if (productListOptional.isEmpty()){
             throw new NoSuchProductListException();
         }
+        System.out.println(productListOptional.get().getDueTo());
         return productListOptional.get();
     }
 
