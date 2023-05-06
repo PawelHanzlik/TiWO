@@ -79,14 +79,12 @@ export class UpdateProductListComponent implements OnInit {
   }
 
   getProductList(){
-    console.log("dfsfdf")
     this.appService.getProductList(localStorage.getItem("listId")).subscribe(
       (response) => {
-        console.log(response.dueTo)
         this.name.value = response.name;
         this.productList.name = response.name;
-        // this.dueTo = response.dueTo;
-        // this.productList.dueTo = response.dueTo;
+        this.dueTo = response.dueTo;
+        this.productList.dueTo = response.dueTo;
         this.description.value = response.description;
         this.productList.description = response.description;
       }

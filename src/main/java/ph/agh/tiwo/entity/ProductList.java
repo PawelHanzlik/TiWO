@@ -1,6 +1,7 @@
 package ph.agh.tiwo.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -33,6 +34,7 @@ public class ProductList {
     private String description;
 
     @Column(name = "dueTo")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dueTo;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
