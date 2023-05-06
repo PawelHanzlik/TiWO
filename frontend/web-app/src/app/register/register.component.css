@@ -4,60 +4,70 @@
   position: absolute;
   top: 150px;
   left: 30%;
-  background: white;
+  background-image: url("https://pwcbh.blob.core.windows.net/products/kartka2.jpg");
   padding: 0;
   font-family: 'Gloria Hallelujah', cursive;
 }
 
 #RegisterTitle{
   position: absolute;
-  top: 22%;
-  left: 48%;
+  text-decoration: underline wavy red;
+  top: 10%;
+  left: 42%;
+  font-size: 1.6rem;
 }
 #Email{
   position: absolute;
   top: 29%;
-  left: 45%;
+  left: 40%;
 }
 #EmailTitle{
   position: absolute;
   top: 25%;
-  left: 38%;
+  left: 50%;
 }
 #PasswordTitle{
   position: absolute;
   top: 35%;
-  left: 39%;
+  left: 50%;
 }
 #Password{
   position: absolute;
   top: 39%;
-  left: 45%;
+  left: 40%;
 }
 #Name{
   position: absolute;
   top: 49%;
-  left: 45%;
+  left: 40%;
 }
 #NameTitle{
   position: absolute;
   top: 45%;
-  left: 38%;
+  left: 50%;
 }
 #Surname{
   position: absolute;
   top: 59%;
-  left: 45%;
+  left: 40%;
 }
 #SurnameTitle{
   position: absolute;
   top: 55%;
-  left: 39%;
+  left: 48%;
 }
 
 .button {
   position: absolute;
-  top: 65%;
+  top: 68%;
   right: 40%;
+  background-image: url("https://pwcbh.blob.core.windows.net/products/kartka2.jpg");
+  padding: 0;
+  font-family: 'Gloria Hallelujah', cursive;
   font-size: 15pt;
+  border: none;
+}
+
+.button:hover{
+  text-decoration: underline black;
 }

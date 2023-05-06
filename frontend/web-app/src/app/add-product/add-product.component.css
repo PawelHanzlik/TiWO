@@ -1,9 +1,12 @@
-.centered {
+#form {
   position: absolute;
   top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 30%;
+  width: 40%;
+  height: 550px;
+  background-image: url("https://pwcbh.blob.core.windows.net/products/kartka2.jpg");
   font-size: 15pt;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 select > option{
   font-size: 15pt;
@@ -13,8 +16,10 @@ select{
 }
 #AddTitle{
   position: absolute;
-  top: 22%;
-  left: 48%;
+  top: 18%;
+  left: 36%;
+  font-size: 1.6rem;
+  text-decoration: underline black;
 }
 #Name{
   position: absolute;
@@ -23,44 +28,54 @@ select{
 }
 #NameSelect{
   position: absolute;
-  top: 27%;
-  left: 55%;
+  top: 37%;
+  left: 43%;
 }
 #NameTitle{
   position: absolute;
-  top: 25%;
-  left: 38%;
+  top: 30%;
+  left: 40%;
 }
 #QuantityTitle{
   position: absolute;
-  top: 35%;
-  left: 39%;
+  top: 46%;
+  left: 47%;
 }
 #Quantity{
   position: absolute;
-  top: 39%;
-  left: 45%;
+  top: 51%;
+  left: 38%;
+  text-align: center;
 }
 #Type{
   position: absolute;
-  top: 49%;
-  left: 45%;
+  top: 63%;
+  left: 40%;
 }
 #TypeSelect{
   position: absolute;
-  top: 47%;
-  left: 55%;
+  top: 65%;
+  left: 38%;
+  text-align: center;
 }
 #TypeTitle{
   position: absolute;
-  top: 45%;
-  left: 38%;
+  top: 59%;
+  left: 44%;
 }
-.button {
+#button {
   position: absolute;
-  top: 55%;
-  right: 40%;
+  top: 75%;
+  right: 39%;
   font-size: 15pt;
+  background: none;
+  font-family: 'Gloria Hallelujah', cursive;
+  border: none;
+  text-decoration: underline black;
+}
+
+#button:hover{
+  color: indianred;
 }
 
 #error{

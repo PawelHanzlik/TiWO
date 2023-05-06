@@ -11,7 +11,7 @@ import {AuthGuard} from "./AuthGuard";
 import {WarehouseComponent} from "./warehouse/warehouse.component";
 
 const routes: Routes =[
-  {path: '', component: MainPageComponent},
+  {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'user-page', component: UserPageComponent, canActivate : [AuthGuard]},
   {path: 'register', component: RegisterComponent},

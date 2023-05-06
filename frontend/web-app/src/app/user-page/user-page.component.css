@@ -22,13 +22,13 @@ table{
 }
 
 td:last-of-type {
-  border-left: 2px solid indianred;
+  border-left: 3px solid indianred;
   width: 20%;
 }
 
 tr {
-  border-bottom: 1px solid lightblue;
-  border-top: 1px solid lightblue;
+  border-bottom: 2px solid lightblue;
+  border-top: 2px solid lightblue;
 }
 
 #kropka {
@@ -38,6 +38,7 @@ tr {
 #opis {
   position: relative;
   left: 5%;
+  bottom: 10%;
   font-size: 1.4rem;
   width: 90%;
 }
@@ -47,47 +48,54 @@ tr {
 }
 
 #buttonUpdateProductList{
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1rem;
+  background: none;
+
 }
 
 #buttonDeleteProductList{
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1rem;
+  background: none;
+
 }
 
 #buttonAddProductList{
   position: relative;
-  left: 50%;
+  left: 37%;
   top: 10%;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1.4rem;
+  background-image: url("https://pwcbh.blob.core.windows.net/products/kartka2.jpg");
+
 }
 #buttonAddProduct{
   position: relative;
   left: 10%;
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1.2rem;
+  background: none;
+
 }
 
 #buttonUpdateProduct{
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 0.9rem;
+  background: none;
+
 }
 #buttonDeleteProduct{
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 0.9rem;
+  background: none;
+
 }
 
 .container{
@@ -103,7 +111,7 @@ tr {
   width: 40%;
   bottom: 17%;
   height: 650px;
-  background: white;
+  background-image: url("https://pwcbh.blob.core.windows.net/products/kartka2.jpg");
   margin: 0;
   padding: 0;
 }
@@ -121,7 +129,7 @@ tr {
   top: 0;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1.4rem;
-  background: white;
+  background-image: url("https://pwcbh.blob.core.windows.net/products/kartka2.jpg");
   box-shadow: 0.25rem 0.25rem 0.75rem rgb(0 0 0 / 0.15);
   padding: 0;
 
@@ -179,10 +187,11 @@ tr {
 }
 
 #add{
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1.1rem;
+  background: none;
+
 }
 
 #add:hover {
@@ -200,11 +209,12 @@ button:hover {
   right: 41%;
   bottom : 11%;
   width: 20%;
-  background: white;
   border: none;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 1.1rem;
   text-decoration: underline black;
+  background: none;
+
 }
 #wyloguj a {
   color: #000000;

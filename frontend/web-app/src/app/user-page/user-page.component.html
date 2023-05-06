@@ -5,7 +5,7 @@
     <p id="money_icon">$ $ $</p>
     <p id="money">Stan konta: {{user.money}}</p>
     <div id = "wplacanie">
-      <input type="text"> &nbsp;
+      <input type="text" [defaultValue]="0" (change)="assignMoney($event.target)"> &nbsp;
       <button id="add" (click)="addMoney()">Doładuj</button>
     </div>
     <p id="money_icon2">$ $ $</p>
@@ -30,7 +30,7 @@
         -->
         <tr *ngFor="let product of row.products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
           <td id="kropka"><li></li></td>
-          <td (click) = "buyProduct(product.id, product.name, product.quantity)">{{product.name}}</td>
+          <td (click) = "buyProduct(product.id, product.name, product.quantity, product.bought)">{{product.name}}</td>
           <td>{{product.quantity}}</td>
           <td>{{product.type}}</td>
           <td><img src="{{product.url}}" alt=""/></td>

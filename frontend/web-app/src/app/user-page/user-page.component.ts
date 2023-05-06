@@ -15,6 +15,7 @@ export class UserPageComponent implements OnInit {
   deleteOk : boolean
   user : User
   money : bigint
+  moneyToAdd: bigint = BigInt(0)
   constructor(private appService: AppService, private router: Router) {
     this.deleteOk = false
     this.user = {
@@ -55,6 +56,10 @@ export class UserPageComponent implements OnInit {
     this.displayLists()
     this.displayUser()
   }
+  assignMoney(value: any){
+    this.moneyToAdd = BigInt(value.value);
+  }
+
   logout(){
     localStorage.setItem("token", "")
     this.router.navigate(['/login'])
@@ -94,14 +99,16 @@ export class UserPageComponent implements OnInit {
   }
 
   async addMoney(){
-    await this.appService.addMoney(this.user.email, BigInt(50)).toPromise()
+    await this.appService.addMoney(this.user.email, this.moneyToAdd).toPromise()
     this.displayLists()
     this.displayUser()
   }
 
-  async buyProduct(productId : bigint,productName : string, productQuantity : number){
-    await this.appService.buyProduct(productId, productName, productQuantity, localStorage.getItem("email")).toPromise()
-    this.displayLists()
-    this.displayUser()
+  async buyProduct(productId : bigint,productName : string, productQuantity : number, productBought : boolean){
+    if(!productBought){
+      await this.appService.buyProduct(productId, productName, productQuantity, localStorage.getItem("email")).toPromise()
+      this.displayLists()
+      this.displayUser()
+    }
   }
 }

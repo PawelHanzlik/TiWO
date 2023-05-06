@@ -1,7 +1,7 @@
 <div id="form">
-  <label class="centered" id="AddTitle" >NOWY PRODUKT</label>
-  <label class="centered" id="NameTitle" for="NameSelect">Nazwa produktu</label>
-  <select name="NameSelect" id="NameSelect" [(ngModel)] = "selectedName" (change)="assignNameSelect($event.target)">
+  <label id="AddTitle" >NOWY PRODUKT</label>
+  <label id="NameTitle" for="NameSelect">Nazwa produktu</label>
+  <select id="NameSelect" [(ngModel)] = "selectedName" (change)="assignNameSelect($event.target)">
     <option value="drukarka">drukarka</option>
     <option value="wiertarka">wiertarka</option>
     <option value="chleb" >chleb</option>
@@ -12,12 +12,12 @@
     <option value="cukier">cukier</option>
     <option value="mleko">mleko</option>
   </select>
-  <label class="centered" id="QuantityTitle" for="Quantity">Ilość</label>
-  <label class="centered" id="TypeTitle" for="TypeSelect">Gramatura</label>
-  <input class="centered" type="number" [min]="1" [step]="1" [defaultValue]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
+  <label id="QuantityTitle" for="Quantity">Ilość</label>
+  <label id="TypeTitle" for="TypeSelect">Gramatura</label>
+  <input type="number" [min]="1" [step]="1" [defaultValue]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
   <input readonly name="TypeSelect" id="TypeSelect" [(ngModel)] = "selectedType">
-  <label class="centered" id="error" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
-  <button id="button" class="button">
+  <label id="error" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
+  <button id="button">
     <a (click)="addProductToList()">Dodaj produkt</a>
   </button>
 
