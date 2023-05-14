@@ -18,8 +18,8 @@ const routes: Routes =[
   {path: 'add-product', component: AddProductComponent, canActivate : [AuthGuard]},
   {path: 'add-product-list', component: AddProductListComponent, canActivate : [AuthGuard]},
   {path: 'warehouse', component: WarehouseComponent},
-  {path: 'update-product', component: UpdateProductComponent},
-  {path: 'update-product-list', component: UpdateProductListComponent}
+  {path: 'update-product', component: UpdateProductComponent, canActivate : [AuthGuard]},
+  {path: 'update-product-list', component: UpdateProductListComponent, canActivate : [AuthGuard]}
 ]
 
 @NgModule({
