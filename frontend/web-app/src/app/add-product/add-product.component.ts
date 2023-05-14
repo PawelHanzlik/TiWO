@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class AddProductComponent implements OnInit {
 
   name: productData;
-  quantity: number;
+  quantity: number | undefined;
   type: productData;
   product : Product
   addOk: boolean
@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
     this.name = {
       value: "chleb"
     }
-    this.quantity = 1
+    this.quantity = undefined
 
     this.type = {
       value: "sztuk"
@@ -66,12 +66,12 @@ export class AddProductComponent implements OnInit {
         this.quantity = value.value;
         this.product.quantity = value.value;
       } else {
-        this.quantity = 1;
+        this.quantity = undefined;
         this.product.quantity = 1;
         this.quantityOk = true
       }
     }else {
-      this.quantity = 1;
+      this.quantity = undefined;
       this.product.quantity = 1;
     }
   }

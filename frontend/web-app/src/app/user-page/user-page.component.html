@@ -27,7 +27,7 @@
           <td>{{product.type}}</td>
           <td><img src="{{product.url}}" alt=""/></td>
           <td>
-          <button id="buttonUpdateProduct" (click) = "updateProduct(product.id)">Zmień produkt</button><br>
+          <button id="buttonUpdateProduct" [disabled]="product.bought"(click) = "updateProduct(product.id)">Zmień produkt</button><br>
           <button id="buttonDeleteProduct" (click) = "deleteProduct(product.id)">Usuń produkt</button>
           </td>
         </tr>

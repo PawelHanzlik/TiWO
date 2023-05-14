@@ -103,8 +103,8 @@ public class UserController {
     }
 
     @PutMapping("/buyProduct")
-    public ResponseEntity<Void> buyProduct(@RequestParam String email, @RequestParam String productName){
-        userService.buyProduct(email, productName);
+    public ResponseEntity<Void> buyProduct(@RequestParam String email, @RequestParam String productName, @RequestParam Double productQuantity){
+        userService.buyProduct(email, productName, productQuantity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

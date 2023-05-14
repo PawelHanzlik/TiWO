@@ -7,11 +7,15 @@
       <td>Rodzaj gramatury</td>
       <td>Zdjecie</td>
     </tr>
-    <tr *ngFor="let product of products" [ngClass]="!product.bought ? 'null' : 'crossed'" >
+    <tr *ngFor="let product of products let i = index">
       <td>{{product.name}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.type}}</td>
       <td><img src="{{product.url}}" alt=""/></td>
+      <p>Podaj ilość</p>
+      <input type="number" [min]="1" [step]="1" [defaultValue]="1" [ngModel] = "quantity.get(product.name)" id="Quantity{{product.name}}" name="Quantity" (change)="assignQuantity($event.target,product.name,i)">
+      <button id="buttonAddProductToWarehouse" [disabled]="quantityOk || quantity.get(product.name) === undefined" (click)="addProduct(product.name)">Dodaj produkty</button> <br>
+      <label id="errorQuantity" *ngIf="quantityOk && i == index" style="color:#990000">Błędna ilość!!!</label>
     </tr>
   </table>
 </div>

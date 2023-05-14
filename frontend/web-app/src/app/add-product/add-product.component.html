@@ -14,12 +14,12 @@
   </select>
   <label id="QuantityTitle" for="Quantity">Ilość</label>
   <label id="TypeTitle" for="TypeSelect">Gramatura</label>
-  <input type="number" [min]="1" [step]="1" [defaultValue]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
+  <input type="number" [min]="1" [step]="1" [(ngModel)] = "quantity" id="Quantity" name="Quantity" (change)="assignQuantity($event.target)">
   <input readonly name="TypeSelect" id="TypeSelect" [(ngModel)] = "selectedType">
   <label id="errorAdd" *ngIf="addOk" style="color:#990000">Dodawanie nie powiodlo sie!!!</label>
   <label id="errorQuantity" *ngIf="quantityOk" style="color:#990000">Błędna ilość!!!</label>
-  <button id="button">
-    <a (click)="addProductToList()">Dodaj produkt</a>
+  <button id="button" [disabled]="quantityOk || this.quantity == undefined" (click)="addProductToList()">
+    <a >Dodaj produkt</a>
   </button>
 
 </div>

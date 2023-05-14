@@ -18,8 +18,8 @@
   <input readonly name="TypeSelect" id="TypeSelect" [(ngModel)] = "selectedType">
   <label id="errorAdd" *ngIf="addOk" style="color:#990000">Zmienianie nie powiodlo sie!!!</label>
   <label id="errorQuantity" *ngIf="quantityOk" style="color:#990000">Błędna ilość!!!</label>
-  <button id="button">
-    <a (click)="updateProductList()">Zmień produkt</a>
+  <button id="button" [disabled]="quantityOk" (click)="updateProductList()">
+    <a>Zmień produkt</a>
   </button>
 
 </div>

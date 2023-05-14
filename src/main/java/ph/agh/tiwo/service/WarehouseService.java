@@ -53,4 +53,19 @@ public class WarehouseService {
             }
         }
     }
+
+    public void addProduct(String productName, Double productQuantity){
+        Optional<Warehouse> warehouseOptional = this.warehouseRepository.findByName("testWarehouse");
+        if (warehouseOptional.isEmpty()){
+            throw new NoSuchWarehouseException();
+        }else {
+            Warehouse warehouse = warehouseOptional.get();
+            for (int i = 0; i < warehouse.getProducts().size(); i++){
+                if (warehouse.getProducts().get(i).getName().equals(productName)){
+                    warehouse.getProducts().get(i).setQuantity(warehouse.getProducts().get(i).getQuantity() + productQuantity);
+                }
+                this.warehouseRepository.save(warehouse);
+            }
+        }
+    }
 }

@@ -103,14 +103,14 @@ public class UserService {
                 .productLists(Collections.emptySet()).build();
     }
 
-    public User buyProduct(String userEmail, String productName) throws NoSuchUserException{
+    public User buyProduct(String userEmail, String productName, Double productQuantity) throws NoSuchUserException{
         Optional<User> userOptional = this.userRepository.findByEmail(userEmail);
         if (userOptional.isEmpty()){
             throw new NoSuchUserException();
         }
         User user =  userOptional.get();
         if (user.getMoney() - ProductMap.getCost(productName) > 0) {
-            user.setMoney(user.getMoney() - ProductMap.getCost(productName));
+            user.setMoney(user.getMoney() - ProductMap.getCost(productName) * productQuantity);
         } else {
             throw new NegativeMoneyException();
         }

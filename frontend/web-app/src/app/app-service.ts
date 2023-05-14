@@ -107,8 +107,12 @@ export class AppService {
 
   public buyProduct<T>(productId : bigint, productName : string, productQuantity : number, userEmail : string | null) : Observable<any>{
     return forkJoin([this.http.put<T>(`${this.apiServerUrl}/tiwo/warehouse/buyProduct?productName=${productName}&productQuantity=${productQuantity}`,{}),
-      this.http.put<T>(`${this.apiServerUrl}/tiwo/user/buyProduct?email=${userEmail}&productName=${productName}`,{}),
+      this.http.put<T>(`${this.apiServerUrl}/tiwo/user/buyProduct?email=${userEmail}&productName=${productName}&productQuantity=${productQuantity}`,{}),
       this.http.put<T>(`${this.apiServerUrl}/tiwo/product/buyProduct?productId=${productId}`,{})])
+  }
+
+  public addProductToWarehouse<T>(name : string, productQuantity : number| undefined) : Observable<T>{
+    return this.http.put<T>(`${this.apiServerUrl}/tiwo/warehouse/addProduct?productName=${name}&productQuantity=${productQuantity}`,{})
   }
 }
 interface user{

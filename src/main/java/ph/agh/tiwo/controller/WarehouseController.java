@@ -36,4 +36,10 @@ public class WarehouseController {
         this.warehouseService.buyProduct(productName, productQuantity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping("/addProduct")
+    public ResponseEntity<Void> addProduct(@RequestParam String productName, @RequestParam Double productQuantity){
+        this.warehouseService.addProduct(productName,productQuantity);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
